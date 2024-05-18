@@ -1,5 +1,6 @@
 import random
 import time
+import threading
 posi_nick, posi_pascal, posi_oliver = 0
 posicao = [posi_nick, posi_pascal, posi_oliver]
 
@@ -10,7 +11,8 @@ def temporizador(minutos): #tempo corrida devera ser = 45
         time.sleep(1)
         segundos -= 1
     print('Tempo acabou')
-temporizador(45)
+thread_temporizador = threading.Thread(target=temporizador, args=(45,))
+thread_temporizador.start()
 
 num_curvas = random.randint(10, 20)
 tamanho_corrida = random.randint(2500, 3000)
@@ -20,9 +22,9 @@ def attack_mode():
     ganho_vel = random.randint(10, 15)
     temporizador(1)
 
-voltas_nick = []
-voltas_pascal = []
-voltas_oliver = []
+voltas_nick = 0
+voltas_pascal = 0
+voltas_oliver = 0
 voltas_lista = [voltas_nick, voltas_pascal, voltas_oliver]
 
 vel_nick, vel_pascal, vel_oliver = 0
@@ -32,15 +34,16 @@ def velocidade_corredores():
         temporizador(0.12)            
         vel_nick = random.randint(200, 250)
         vel_pascal = random.randint(200, 250)
-        vel_oliver = random.randint(200, 250) 
+        vel_oliver = random.randint(200, 250)
+
         
                   
 
     
-    '''
-    é preciso adicionar as condições de velocidade na curva, para isso preciso mexer em como as retas
-    e as curvas irão se comportar
-    '''
+'''
+é preciso adicionar as condições de velocidade na curva, para isso preciso mexer em como as retas
+e as curvas irão se comportar
+'''
 
 '''
 o numero de curvas randomizado vai determinar a distância possível entre cada uma para que seja possível 
@@ -59,9 +62,12 @@ def posicao_carro():
         global tamanho_corrida
         for i in range(3):
             posicao[i] += vel_carro[i]
+        for i in range(3):
 
-        if posicao == tamanho_corrida:
-            posicao == 0
+            if posicao[i] == tamanho_corrida:
+                posicao[i] = 0
+                voltas_lista[i] += 1
 
-posicao_carro()            
+posicao_carro()
+
             
