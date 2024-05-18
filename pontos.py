@@ -1,17 +1,18 @@
-
-def media_pontos():
+import random
+def adicao_pontos():
+    lista_media = [20, 16, 10]
     nick_cassady = []
     pascal_wehrlein = []
     oliver_rowland = []
-    nick_cassady = [15, 19, 26, 19]
-    pascal_wehrlein = [26, 13, 10, 12]
-    oliver_rowland = [0, 8, 15, 15]
-    lista_pontos_participantes = [nick_cassady, pascal_wehrlein, oliver_rowland]
-    lista_pontos_total = []
-    for i in range(len(lista_pontos_participantes)):
-        lista_pontos_total.append(sum(lista_pontos_participantes[i]))        
-    nick_total = [lista_pontos_total[0]]
-    pascal_total = [lista_pontos_total[1]]
-    oliver_total = [lista_pontos_total[2]]
+    lista = [nick_cassady, pascal_wehrlein, oliver_rowland]
+    for i in range(len(lista)):
+        lista_random = []
+        for j in range(4):                        
+            lista_random.append(random.randint(8, 11))            
+            lista[i].append(random.randint(lista_random[i], lista_media[i]))
+def media_pontos():
+    adicao_pontos()
+
+    
     
     
