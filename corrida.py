@@ -1,7 +1,11 @@
 import random
 import time
 import threading
-
+'''
+Todos os valores usados abaixo ainda não são baseados em dados coletados de corrida, apenas do site da Formula E.
+Em versões futuras os códigos serão melhorados e baseados em dados muito mais consistentes.
+Versão 1.0.0
+'''
 posi_nick, posi_pascal, posi_oliver = 0, 0, 0  # Variáveis de posição de cada piloto
 posicao = [posi_nick, posi_pascal, posi_oliver]  # Lista que guarda as posições
 voltas_nick, voltas_pascal, voltas_oliver = 0, 0, 0  # Voltas de cada piloto
