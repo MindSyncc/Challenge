@@ -1,7 +1,7 @@
 import random
 
 def adicao_pontos():
-    lista_media = [20, 16, 10]
+    lista_media = [20, 16, 10] #sistema de ponto, eu nao acabei
     nick_cassady = []
     pascal_wehrlein = []
     oliver_rowland = []
