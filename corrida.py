@@ -4,7 +4,7 @@ import threading
 '''
 Todos os valores usados abaixo ainda não são baseados em dados coletados de corrida, apenas do site da Formula E.
 Em versões futuras os códigos serão melhorados e baseados em dados muito mais consistentes.
-Versão 1.0.1
+Versão 1.0.2
 '''
 posi_nick, posi_pascal, posi_oliver = 0, 0, 0  # Variáveis de posição de cada piloto
 posicao = [posi_nick, posi_pascal, posi_oliver]  # Lista que guarda as posições
@@ -22,7 +22,6 @@ tamanho_reta = 3 * (tamanho_corrida / num_curvas) / 4
 tamanho_curva = 1 * (tamanho_corrida / num_curvas) / 4
 lista_curva_reta = []
 soma_corrida = 0
-corrida = 0
 print(f'O número de curvas na corrida é {num_curvas}')
 # Criando a lista de curvas e retas
 while soma_corrida < tamanho_corrida:
@@ -58,26 +57,12 @@ def attack_mode():
     ganho_vel = random.randint(10, 15)  # Ganho de velocidade devido ao modo de ataque
     time.sleep(1)
 
-# Função para calcular a velocidade dos pilotos
-def velocidade_corredores():
-    global vel_carro
-    while tempo > 0:
-        for i in range(len(vel_carro)):
-            for j in range(len(lista_curva_reta)):
-                if j % 2 == 0:  # Reta
-                    vel_carro[i] = random.randint(200, 250) / 3.6  # Conversão de km/h para m/s
-                    print(f'A velocidade nesse segundo é {vel_carro[i]}')
-                else:  # Curva
-                    vel_carro[i] = random.randint(70, 130) / 3.6
-                    print(f'A velocidade nesse segundo é {vel_carro[i]}')
-                time.sleep(1)
-
 # Função para atualizar a posição dos carros
 def posicao_carro():
-    while tempo > 0:
-        velocidade_corredores()
-        global posicao
-        global tamanho_corrida
+    global vel_carro
+    global posicao
+    global tamanho_corrida
+    while True:        
         for i in range(3):
             posicao[i] += vel_carro[i]
             if posicao[i] >= tamanho_corrida:
@@ -87,8 +72,10 @@ def posicao_carro():
                 pascal = voltas_lista[1]
                 oliver = voltas_lista[2]                 
         time.sleep(1)
-
+        if tempo < 2:
+            break
 def pontos(): #sistema de pontos
+    global nick, pascal, oliver
     if nick > pascal and nick > oliver and pascal > oliver:
         pontos_nick.append(25)
         pontos_pascal.append(18)
@@ -116,7 +103,7 @@ def pontos(): #sistema de pontos
     
 # Iniciar a corrida        
 posicao_carro()
-if tempo == 0:
+if tempo == 1:
     pontos()
     print(f'nick = {pontos_nick}')
     print(f'pascal = {pontos_pascal}')
