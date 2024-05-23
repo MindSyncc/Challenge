@@ -16,14 +16,24 @@ nick, pascal, oliver = 0, 0, 0
 pontos_nick, pontos_pascal, pontos_oliver = [], [], []
 
 # Número de curvas e tamanho da corrida
-num_curvas = random.randint(10, 20)
+# Obs: Vale ressaltar que os valores abaixos são estimados, pois como as corridas da Formula E são realizadas em  circuitos temporários montados em ruas e avenidas de grandes cidades ao redor do mundo, as pistas terão diferentes formatos e traçados
+
+num_curvas = random.randint(10, 20) # Normalmente as corridas da Formula E geralmente possuem de 10 a 20 curvas 
 tamanho_corrida = random.randint(2500, 3000)  # Tamanho da corrida entre 2.5 e 3.0 km
-tamanho_reta = 3 * (tamanho_corrida / num_curvas) / 4
-tamanho_curva = 1 * (tamanho_corrida / num_curvas) / 4
-lista_curva_reta = []
-soma_corrida = 0
+
+# A fim encontrar a distância aproximada de cada curva em uma corrida, a expressão (tamanho_corrida / num_curvas) utilizará o tamanho da corrida e irá dividi-lá pelo número de curvas
+# Obs: o valor da distância de uma curva será correspondente ao início de uma curva em uma corrida até o começo de outra
+
+tamanho_reta = 3 * (tamanho_corrida / num_curvas) / 4 # Estimamos que o tamanho de uma reta receberá 3/4 do valor da expressão (tamanho_corrida / num_curvas)
+
+tamanho_curva = 1 * (tamanho_corrida / num_curvas) / 4 # Estimamos que o tamanho da curva receberá 1/4 do valor da expressão (tamanho_corrida / num_curvas)
+
+lista_curva_reta = [] # Lista que armazenará as distâncias das curvas e retas da corrida
+soma_corrida = 0 # Variável somadora que irá ser utilizada para parar a estrutura de repetição quando todas as distâncias de curvas e retas forem armazenadas na lista
+
 corrida = 0
-print(f'O número de curvas na corrida é {num_curvas}')
+print(f'O número de curvas na corrida é {num_curvas}') #Imprime o número de curvas da corrida
+
 # Criando a lista de curvas e retas
 while soma_corrida < tamanho_corrida:
     lista_curva_reta.append(soma_corrida)
@@ -88,7 +98,8 @@ def posicao_carro():
                 oliver = voltas_lista[2]                 
         time.sleep(1)
 
-def pontos(): #sistema de pontos
+def pontos(): #sistema de pontos baseados em suas classificações
+    #(1° lugar: 25 pontos; 2° lugar :18 pontos; 3°lugar: 15 pontos)
     if nick > pascal and nick > oliver and pascal > oliver:
         pontos_nick.append(25)
         pontos_pascal.append(18)
