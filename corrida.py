@@ -12,7 +12,9 @@ voltas_nick, voltas_pascal, voltas_oliver = 0, 0, 0  # Voltas de cada piloto
 voltas_lista = [voltas_nick, voltas_pascal, voltas_oliver]  # Lista que guarda o número de voltas
 vel_nick, vel_pascal, vel_oliver = 0, 0, 0  # Velocidade inicial de cada piloto
 vel_carro = [vel_nick, vel_pascal, vel_oliver]
-
+corrida = True
+nick, pascal, oliver = 0
+pontos_nick, pontos_pascal, pontos_oliver = []
 # Número de curvas e tamanho da corrida
 num_curvas = random.randint(10, 20)
 tamanho_corrida = random.randint(2500, 3000)  # Tamanho da corrida entre 2.5 e 3.0 km
@@ -38,7 +40,8 @@ def temporizador(segundos):
         mins, secs = divmod(segundos, 60)
         time.sleep(1)
         segundos -= 1
-    print('Tempo acabou')
+    print('Tempo acabou')  
+    corrida = False  
 
 # Inicia a thread do temporizador
 thread_temporizador = threading.Thread(target=temporizador, args=(45 * 60,))
@@ -71,9 +74,43 @@ def posicao_carro():
             if posicao[i] >= tamanho_corrida:
                 posicao[i] -= tamanho_corrida
                 voltas_lista[i] += 1
+                nick = voltas_lista[0]
+                pascal = voltas_lista[1]
+                oliver = voltas_lista[2]   
         time.sleep(1)
-
 # Iniciar a corrida
+def pontos():
+    if nick > pascal and nick > oliver and pascal > oliver:
+        pontos_nick.append(25)
+        pontos_pascal.append(18)
+        pontos_oliver.append(15)
+    elif nick > pascal and nick > oliver and oliver > pascal:
+        pontos_nick.append(25)
+        pontos_pascal.append(15)
+        pontos_oliver.append(18)          
+    elif pascal > nick and pascal > oliver and nick > oliver:
+        pontos_nick.append(18)
+        pontos_pascal.append(25)
+        pontos_oliver.append(15)
+    elif pascal > nick and pascal > oliver and oliver > nick:
+        pontos_nick.append(15)
+        pontos_pascal.append(25)
+        pontos_oliver.append(18)
+    elif oliver > nick and oliver > pascal and nick > pascal:
+        pontos_nick.append(18)
+        pontos_pascal.append(15)
+        pontos_oliver.append(25)
+    elif oliver > nick and oliver > pascal and pascal > nick:
+        pontos_nick.append(15)
+        pontos_pascal.append(18)
+        pontos_oliver.append(25)       
+    
+        
 posicao_carro()
+if corrida == False:
+    pontos()
+    
+
+
 
             
