@@ -113,56 +113,7 @@ def posicao_carro():
     print(voltas_lista)
 
 
-def pontos(): #sistema de pontos
-    if nick + posicao[0] > pascal + posicao[1] and nick + posicao[0] > oliver + posicao[2] and pascal + posicao[1] > oliver + posicao[2]:
-        pontos_nick.append(25)
-        pontos_pascal.append(18)
-        pontos_oliver.append(15)
-    elif nick + posicao[0] > pascal + posicao[1] and nick + posicao[0] > oliver + posicao[2] and oliver + posicao[2] > pascal + posicao[1]:
-        pontos_nick.append(25)
-        pontos_pascal.append(15)
-        pontos_oliver.append(18)          
-    elif pascal + posicao[1] > nick + posicao[0] and pascal + posicao[1] > oliver + posicao[2] and nick + posicao[0] > oliver + posicao[2]:
-        pontos_nick.append(18)
-        pontos_pascal.append(25)
-        pontos_oliver.append(15)
-    elif pascal + posicao[1] > nick + posicao[0] and pascal + posicao[1] > oliver + posicao[2] and oliver + posicao[2] > nick + posicao[0]:
-        pontos_nick.append(15)
-        pontos_pascal.append(25)
-        pontos_oliver.append(18)
-    elif oliver + posicao[2] > nick + posicao[0] and oliver + posicao[2] > pascal + posicao[1] and nick + posicao[0] > pascal + posicao[1]:
-        pontos_nick.append(18)
-        pontos_pascal.append(15)
-        pontos_oliver.append(25)
-    elif oliver + posicao[2] > nick + posicao[0] and oliver + posicao[2] > pascal + posicao[1] and pascal + posicao[1] > nick + posicao[0]:
-        pontos_nick.append(15)
-        pontos_pascal.append(18)
-        pontos_oliver.append(25)
-    else:
-        if posicao[0] > posicao[1] and posicao[0] > posicao[2] and posicao[1] > posicao[2]:
-            pontos_nick.append(25)
-            pontos_pascal.append(18)
-            pontos_oliver.append(15)
-        elif posicao[0] > posicao[1] and posicao[0] > posicao[2] and posicao[2] > posicao[1]:
-            pontos_nick.append(25)
-            pontos_pascal.append(15)
-            pontos_oliver.append(18)          
-        elif posicao[1] > posicao[0] and posicao[1] > posicao[2] and posicao[0] > posicao[2]:
-            pontos_nick.append(18)
-            pontos_pascal.append(25)
-            pontos_oliver.append(15)
-        elif posicao[1] > posicao[0] and posicao[1] > posicao[2] and posicao[2] > posicao[0]:
-            pontos_nick.append(15)
-            pontos_pascal.append(25)
-            pontos_oliver.append(18)
-        elif posicao[2] > posicao[0] and posicao[2] > posicao[1] and posicao[0] > posicao[1]:
-            pontos_nick.append(18)
-            pontos_pascal.append(15)
-            pontos_oliver.append(25)
-        elif posicao[2] > posicao[0] and posicao[2] > posicao[1] and posicao[1] > posicao[0]:
-            pontos_nick.append(15)
-            pontos_pascal.append(18)
-            pontos_oliver.append(25)
+
         
     
 # Iniciar a corrida        
