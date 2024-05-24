@@ -11,7 +11,7 @@ posicao = [posi_nick, posi_pascal, posi_oliver]  # Lista que guarda as posiçõe
 voltas_nick, voltas_pascal, voltas_oliver = 0, 0, 0  # Voltas de cada piloto
 voltas_lista = [voltas_nick, voltas_pascal, voltas_oliver]  # Lista que guarda o número de voltas
 vel_nick, vel_pascal, vel_oliver = 0, 0, 0  # Velocidade inicial de cada piloto
-vel_carro = [vel_nick, vel_pascal, vel_oliver]
+vel_carro = []
 nick, pascal, oliver = 0, 0, 0
 pontos_nick, pontos_pascal, pontos_oliver = [], [], []
 
@@ -36,10 +36,10 @@ print(f'O número de curvas na corrida é {num_curvas}') #Imprime o número de c
 
 # Criando a lista de curvas e retas
 while soma_corrida < tamanho_corrida:
-    lista_curva_reta.append(soma_corrida)
     soma_corrida += tamanho_curva
-    lista_curva_reta.append(soma_corrida)
-    soma_corrida += tamanho_reta    
+    lista_curva_reta.append(tamanho_curva)
+    soma_corrida += tamanho_reta 
+    lista_curva_reta.append(tamanho_reta)
     
 print(f'O tamanho da corrida é {soma_corrida}')        
 
@@ -68,35 +68,50 @@ def attack_mode():
     ganho_vel = random.randint(10, 15)  # Ganho de velocidade devido ao modo de ataque
     time.sleep(1)
 
+curva = 0
+cont = 0
+
 # Função para calcular a velocidade dos pilotos
 def velocidade_corredores():
+    global cont
     global vel_carro
-    while tempo > 0:
-        for i in range(len(vel_carro)):
-            for j in range(len(lista_curva_reta)):
-                if j % 2 == 0:  # Reta
-                    vel_carro[i] = random.randint(200, 250) / 3.6  # Conversão de km/h para m/s
-                    print(f'A velocidade nesse segundo é {vel_carro[i]}')
-                else:  # Curva
-                    vel_carro[i] = random.randint(70, 130) / 3.6
-                    print(f'A velocidade nesse segundo é {vel_carro[i]}')
-                time.sleep(1)
+    global lista_curva_reta
+    #for x in range(len(vel_carro)):
+    for j in range(3):
+        if curva % 2 == 0:  # Curva
+            vel_carro.append(int(random.randint(70, 130) / 3.6))  # Conversão de km/h para m/s
+            print(f'A velocidade nesse segundo é {vel_carro[j]}')
+        else:  # Reta
+            vel_carro.append(int(random.randint(200, 250) / 3.6))
+            print(f'A velocidade nesse segundo é {vel_carro[j]}')
+            #time.sleep(1)
+        cont += 1
+    print(vel_carro, cont)
 
 # Função para atualizar a posição dos carros
 def posicao_carro():
-    while tempo > 0:
+    global cont
+    global curva
+    global vel_carro
+    global posicao
+    global tamanho_corrida
+    while True:
         velocidade_corredores()
-        global posicao
-        global tamanho_corrida
-        for i in range(3):
+        for i in range(len(posicao)):
             posicao[i] += vel_carro[i]
             if posicao[i] >= tamanho_corrida:
                 posicao[i] -= tamanho_corrida
                 voltas_lista[i] += 1
                 nick = voltas_lista[0]
                 pascal = voltas_lista[1]
-                oliver = voltas_lista[2]                 
-        time.sleep(1)
+                oliver = voltas_lista[2]
+        if cont >= 10:
+            break
+        vel_carro = []
+        curva += 1
+        #time.sleep(1)
+    print(voltas_lista)
+
 
 def pontos(): #sistema de pontos baseados em suas classificações
     #(1° lugar: 25 pontos; 2° lugar :18 pontos; 3°lugar: 15 pontos)
@@ -133,5 +148,3 @@ if tempo == 0:
     print(f'pascal = {pontos_pascal}')
     print(f'oliver = {pontos_oliver}')
 
-
-            
