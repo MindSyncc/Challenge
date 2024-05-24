@@ -4,7 +4,7 @@ import threading
 '''
 Todos os valores usados abaixo ainda não são baseados em dados coletados de corrida, apenas do site da Formula E.
 Em versões futuras os códigos serão melhorados e baseados em dados muito mais consistentes.
-Versão 1.0.2
+Versão 1.0.3
 '''
 posi_nick, posi_pascal, posi_oliver = 0, 0, 0  # Variáveis de posição de cada piloto
 posicao = [posi_nick, posi_pascal, posi_oliver]  # Lista que guarda as posições
@@ -19,7 +19,7 @@ pontos_nick, pontos_pascal, pontos_oliver = [], [], []
 # Obs: Vale ressaltar que os valores abaixos são estimados, pois como as corridas da Formula E são realizadas em  circuitos temporários montados em ruas e avenidas de grandes cidades ao redor do mundo, as pistas terão diferentes formatos e traçados
 
 num_curvas = random.randint(10, 20) # Normalmente as corridas da Formula E geralmente possuem de 10 a 20 curvas 
-tamanho_corrida = random.randint(2500, 3000)  # Tamanho da corrida entre 2.5 e 3.0 km
+tamanho_corrida = random.randint(2500, 3000) # Tamanho da corrida entre 2.5 e 3.0 km
 tamanho_reta = 3 * (tamanho_corrida / num_curvas) / 4
 tamanho_curva = 1 * (tamanho_corrida / num_curvas) / 4
 lista_curva_reta = []
@@ -37,7 +37,7 @@ lista_curva_reta = [] # Lista que armazenará as distâncias das curvas e retas 
 soma_corrida = 0 # Variável somadora que irá ser utilizada para parar a estrutura de repetição quando todas as distâncias de curvas e retas forem armazenadas na lista
 
 corrida = 0
-print(f'O número de curvas na corrida é {num_curvas}') #Imprime o número de curvas da corrida
+ #Imprime o número de curvas da corrida
 
 # Criando a lista de curvas e retas
 while soma_corrida < tamanho_corrida:
@@ -46,7 +46,7 @@ while soma_corrida < tamanho_corrida:
     soma_corrida += tamanho_reta 
     lista_curva_reta.append(tamanho_reta)
     
-print(f'O tamanho da corrida é {soma_corrida}')        
+print(f'O tamanho da corrida é {int(soma_corrida)}')        
 
 tempo = 60    
 # Posição para o modo de ataque
@@ -60,12 +60,12 @@ def temporizador(segundos):
         mins, secs = divmod(segundos, 60)
         time.sleep(1)
         segundos -= 1
-        tempo -= 60
+        tempo = 0
         print(f'segundos restantes {segundos}')
     print('Tempo acabou')       
 
 # Inicia a thread do temporizador
-thread_temporizador = threading.Thread(target=temporizador, args=(1 * 60,))
+thread_temporizador = threading.Thread(target=temporizador, args=(1 * 0,))
 thread_temporizador.start()
 
 # Função para o modo de ataque
@@ -78,9 +78,7 @@ cont = 0
 
 # Função para calcular a velocidade dos pilotos
 def velocidade_corredores():
-    global cont
-    global vel_carro
-    global lista_curva_reta
+    global cont, vel_carro, lista_curva_reta
     #for x in range(len(vel_carro)):
     for j in range(3):
         if curva % 2 == 0:  # Curva
@@ -95,22 +93,19 @@ def velocidade_corredores():
 
 # Função para atualizar a posição dos carros
 def posicao_carro():
-    global cont
-    global curva
-    global vel_carro
-    global posicao
-    global tamanho_corrida
+    global cont, curva, vel_carro, posicao, tamanho_corrida
     while True:
         velocidade_corredores()
         for i in range(len(posicao)):
             posicao[i] += vel_carro[i]
+            print(posicao[i])
             if posicao[i] >= tamanho_corrida:
                 posicao[i] -= tamanho_corrida
                 voltas_lista[i] += 1
                 nick = voltas_lista[0]
                 pascal = voltas_lista[1]
                 oliver = voltas_lista[2]
-        if cont >= 10:
+        if cont >= 200:
             break
         vel_carro = []
         curva += 1
@@ -119,36 +114,61 @@ def posicao_carro():
 
 
 def pontos(): #sistema de pontos
-    if nick > pascal and nick > oliver and pascal > oliver:
+    if nick + posicao[0] > pascal + posicao[1] and nick + posicao[0] > oliver + posicao[2] and pascal + posicao[1] > oliver + posicao[2]:
         pontos_nick.append(25)
         pontos_pascal.append(18)
         pontos_oliver.append(15)
-    elif nick > pascal and nick > oliver and oliver > pascal:
+    elif nick + posicao[0] > pascal + posicao[1] and nick + posicao[0] > oliver + posicao[2] and oliver + posicao[2] > pascal + posicao[1]:
         pontos_nick.append(25)
         pontos_pascal.append(15)
         pontos_oliver.append(18)          
-    elif pascal > nick and pascal > oliver and nick > oliver:
+    elif pascal + posicao[1] > nick + posicao[0] and pascal + posicao[1] > oliver + posicao[2] and nick + posicao[0] > oliver + posicao[2]:
         pontos_nick.append(18)
         pontos_pascal.append(25)
         pontos_oliver.append(15)
-    elif pascal > nick and pascal > oliver and oliver > nick:
+    elif pascal + posicao[1] > nick + posicao[0] and pascal + posicao[1] > oliver + posicao[2] and oliver + posicao[2] > nick + posicao[0]:
         pontos_nick.append(15)
         pontos_pascal.append(25)
         pontos_oliver.append(18)
-    elif oliver > nick and oliver > pascal and nick > pascal:
+    elif oliver + posicao[2] > nick + posicao[0] and oliver + posicao[2] > pascal + posicao[1] and nick + posicao[0] > pascal + posicao[1]:
         pontos_nick.append(18)
         pontos_pascal.append(15)
         pontos_oliver.append(25)
-    elif oliver > nick and oliver > pascal and pascal > nick:
+    elif oliver + posicao[2] > nick + posicao[0] and oliver + posicao[2] > pascal + posicao[1] and pascal + posicao[1] > nick + posicao[0]:
         pontos_nick.append(15)
         pontos_pascal.append(18)
-        pontos_oliver.append(25)       
+        pontos_oliver.append(25)
+    else:
+        if posicao[0] > posicao[1] and posicao[0] > posicao[2] and posicao[1] > posicao[2]:
+            pontos_nick.append(25)
+            pontos_pascal.append(18)
+            pontos_oliver.append(15)
+        elif posicao[0] > posicao[1] and posicao[0] > posicao[2] and posicao[2] > posicao[1]:
+            pontos_nick.append(25)
+            pontos_pascal.append(15)
+            pontos_oliver.append(18)          
+        elif posicao[1] > posicao[0] and posicao[1] > posicao[2] and posicao[0] > posicao[2]:
+            pontos_nick.append(18)
+            pontos_pascal.append(25)
+            pontos_oliver.append(15)
+        elif posicao[1] > posicao[0] and posicao[1] > posicao[2] and posicao[2] > posicao[0]:
+            pontos_nick.append(15)
+            pontos_pascal.append(25)
+            pontos_oliver.append(18)
+        elif posicao[2] > posicao[0] and posicao[2] > posicao[1] and posicao[0] > posicao[1]:
+            pontos_nick.append(18)
+            pontos_pascal.append(15)
+            pontos_oliver.append(25)
+        elif posicao[2] > posicao[0] and posicao[2] > posicao[1] and posicao[1] > posicao[0]:
+            pontos_nick.append(15)
+            pontos_pascal.append(18)
+            pontos_oliver.append(25)
+        
     
 # Iniciar a corrida        
 posicao_carro()
-if tempo == 1:
-    pontos()
-    print(f'nick = {pontos_nick}')
-    print(f'pascal = {pontos_pascal}')
-    print(f'oliver = {pontos_oliver}')
+pontos()
+print(f'nick = {pontos_nick}')
+print(f'pascal = {pontos_pascal}')
+print(f'oliver = {pontos_oliver}')
 
