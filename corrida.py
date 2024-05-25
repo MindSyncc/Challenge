@@ -53,6 +53,8 @@ tempo = 60
 attack_mode_posicao = random.randint(0, num_curvas)
 
 # Função de temporizador
+   
+
 def temporizador(segundos):
     global tempo
     start_time = time.time()
@@ -105,7 +107,7 @@ def posicao_carro():
                 nick = voltas_lista[0]
                 pascal = voltas_lista[1]
                 oliver = voltas_lista[2]
-        if cont >= 2700:
+        if cont >= 60:
             break
         vel_carro = []
         cont += 1
