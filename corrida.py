@@ -36,7 +36,7 @@ tamanho_curva = 1 * (tamanho_corrida / num_curvas) / 4 # Estimamos que o tamanho
 lista_curva_reta = [] # Lista que armazenará as distâncias das curvas e retas da corrida
 soma_corrida = 0 # Variável somadora que irá ser utilizada para parar a estrutura de repetição quando todas as distâncias de curvas e retas forem armazenadas na lista
 
-corrida = 0
+
  #Imprime o número de curvas da corrida
 
 # Criando a lista de curvas e retas
@@ -73,8 +73,8 @@ def attack_mode():
     ganho_vel = random.randint(10, 15)  # Ganho de velocidade devido ao modo de ataque
     time.sleep(1)
 
+cont = 0 #serve como variavel contadora de tempo (45 min * 60) = 2700s
 curva = 0
-cont = 0
 
 # Função para calcular a velocidade dos pilotos
 def velocidade_corredores():
@@ -88,7 +88,7 @@ def velocidade_corredores():
             vel_carro.append(int(random.randint(200, 250) / 3.6))
             print(f'A velocidade nesse segundo é {vel_carro[j]}')
             #time.sleep(1)
-        cont += 1
+        
     print(vel_carro, cont)
 
 # Função para atualizar a posição dos carros
@@ -105,36 +105,37 @@ def posicao_carro():
                 nick = voltas_lista[0]
                 pascal = voltas_lista[1]
                 oliver = voltas_lista[2]
-        if cont >= 200:
+        if cont >= 2700:
             break
         vel_carro = []
+        cont += 1
         curva += 1
         #time.sleep(1)
     print(voltas_lista)
 
 
 def pontos(): #sistema de pontos
-    if nick + posicao[0] > pascal + posicao[1] and nick + posicao[0] > oliver + posicao[2] and pascal + posicao[1] > oliver + posicao[2]:
+    if nick > pascal and nick > oliver and pascal > oliver:
         pontos_nick.append(25)
         pontos_pascal.append(18)
         pontos_oliver.append(15)
-    elif nick + posicao[0] > pascal + posicao[1] and nick + posicao[0] > oliver + posicao[2] and oliver + posicao[2] > pascal + posicao[1]:
+    elif nick > pascal and nick > oliver and oliver > pascal:
         pontos_nick.append(25)
         pontos_pascal.append(15)
         pontos_oliver.append(18)          
-    elif pascal + posicao[1] > nick + posicao[0] and pascal + posicao[1] > oliver + posicao[2] and nick + posicao[0] > oliver + posicao[2]:
+    elif pascal > nick and pascal > oliver and nick > oliver:
         pontos_nick.append(18)
         pontos_pascal.append(25)
         pontos_oliver.append(15)
-    elif pascal + posicao[1] > nick + posicao[0] and pascal + posicao[1] > oliver + posicao[2] and oliver + posicao[2] > nick + posicao[0]:
+    elif pascal > nick and pascal > oliver and oliver > nick:
         pontos_nick.append(15)
         pontos_pascal.append(25)
         pontos_oliver.append(18)
-    elif oliver + posicao[2] > nick + posicao[0] and oliver + posicao[2] > pascal + posicao[1] and nick + posicao[0] > pascal + posicao[1]:
+    elif oliver > nick and oliver  > pascal and nick > pascal:
         pontos_nick.append(18)
         pontos_pascal.append(15)
         pontos_oliver.append(25)
-    elif oliver + posicao[2] > nick + posicao[0] and oliver + posicao[2] > pascal + posicao[1] and pascal + posicao[1] > nick + posicao[0]:
+    elif oliver > nick and oliver  > pascal and pascal  > nick:
         pontos_nick.append(15)
         pontos_pascal.append(18)
         pontos_oliver.append(25)
