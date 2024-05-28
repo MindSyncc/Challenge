@@ -1,4 +1,4 @@
-'''Versão 1.0.4'''
+'''Versão 1.0.5'''
 import time
 
 time.sleep(1)
