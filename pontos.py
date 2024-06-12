@@ -1,24 +1,29 @@
-import random
+# Importar as listas de voltas e posições
+import corrida
 from corrida import voltas_lista, posicao
 
+# Lista de pontos disponíveis para as posições
 pontos = [25, 18, 15]
-corredor = {"nick": voltas_lista[0], "pascal": voltas_lista[1], "oliver": voltas_lista[2]}
-print(f'Antes da ordenação: {corredor}')
 
-# ordena o dicionário de forma decrescente pelo valor
-corredor = {k: v for k, v in sorted(
-    corredor.items(), key=lambda item: item[1], reverse=True)}
-print(f'Depois da ordenação: {corredor}')
+# Dicionário com os corredores e suas voltas
+corredor = {"Nick": voltas_lista[0], "Pascal": voltas_lista[1], "Oliver": voltas_lista[2]}
 
-# gera um novo dicionário para armazenar as pontuações de cada corredor
+# Ordenar o dicionário de corredores de forma decrescente pelos valores (voltas)
+corredor = {k: v for k, v in sorted(corredor.items(), key=lambda item: item[1], reverse=True)}
+print('='*37)
+print('Distância percorrida por cada piloto: ')
+for key, value in corredor.items():           
+    print(f'{key} percorreu {value} kms')
+print('='*37)
+# Novo dicionário para armazenar as pontuações de cada corredor
 corredor_pontos = {}
 
-# indice da lista
+# Índice para a lista de pontos
 i = 0
-# percorre os itens do dicionário 'corredor' e vai inserindo no novo dicionário os pontos
 
+# Percorrer os itens do dicionário 'corredor' e inserir no novo dicionário os pontos
 for key, value in corredor.items():
-    corredor_pontos[key] = pontos[i]
-    i += 1
-
-print(f'Dicionário com pontos: {corredor_pontos}')
+    if i < len(pontos):  # Verifica se ainda há pontos disponíveis na lista
+        corredor_pontos[key] = pontos[i]
+        print(f'{i+1}°lugar - {key}: {pontos[i]} pontos')
+    i += 1  # Incrementa o índice para a próxima posição de pontos

@@ -1,19 +1,56 @@
 import random
-import time
-import threading
 import math
 '''
 Todos os valores usados abaixo ainda não são baseados em dados coletados de corrida, apenas do site da Formula E.
 Em versões futuras os códigos serão melhorados e baseados em dados muito mais consistentes.
 Versão 1.0.5
 '''
+    
+
+# Inicia a thread do temporizador
+
+# Função para o modo de ataque
+
+cont = 0  # serve como variavel contadora de tempo (45 min * 60) = 2700s
+curva = 0
+
+
+# Função para calcular a velocidade dos pilotos
+def velocidade_corredores():
+    global cont, vel_carro, lista_curva_reta
+    for j in range(3):
+        if curva % 2 == 0:  # Curva
+            vel_carro.append(int(random.randint(70, 130) / 3.6))  # Conversão de km/h para m/s            
+        else:  # Reta
+            vel_carro.append(int(random.randint(200, 250) / 3.6))                                    
+
+
+# Função para atualizar a posição dos carros
+def posicao_carro():
+    global cont, curva, vel_carro, posicao, tamanho_corrida
+    while True:
+        velocidade_corredores()
+        for i in range(len(posicao)):
+            posicao[i] += vel_carro[i]
+            if posicao[i] >= math.ceil(soma_corrida):
+                posicao[i] -= math.ceil(soma_corrida)
+                voltas_lista[i] += 1
+                
+        if cont >= 60:
+            break
+        vel_carro = []
+        cont += 1
+        curva += 1
+    for k in range(3):        
+        voltas_lista[k] += (posicao[k] / 10000)    
+
+
 posi_nick, posi_pascal, posi_oliver = 0, 0, 0  # Variáveis de posição de cada piloto
 posicao = [posi_nick, posi_pascal, posi_oliver]  # Lista que guarda as posições
-  # Voltas de cada piloto
+# Voltas de cada piloto
 voltas_lista = [0, 0, 0]  # Lista que guarda o número de voltas
 vel_nick, vel_pascal, vel_oliver = 0, 0, 0  # Velocidade inicial de cada piloto
 vel_carro = []
-
 
 
 # Número de curvas e tamanho da corrida
@@ -32,11 +69,10 @@ soma_corrida = 0
 
 tamanho_reta = 3 * (tamanho_corrida / num_curvas) / 4 # Estimamos que o tamanho de uma reta receberá 3/4 do valor da expressão (tamanho_corrida / num_curvas)
 tamanho_curva = 1 * (tamanho_corrida / num_curvas) / 4 # Estimamos que o tamanho da curva receberá 1/4 do valor da expressão (tamanho_corrida / num_curvas)
-lista_curva_reta = [] # Lista que armazenará as distâncias das curvas e retas da corrida
-soma_corrida = 0 # Variável somadora que irá ser utilizada para parar a estrutura de repetição quando todas as distâncias de curvas e retas forem armazenadas na lista
+lista_curva_reta = []  # Lista que armazenará as distâncias das curvas e retas da corrida
+soma_corrida = 0  # Variável somadora que irá ser utilizada para parar a estrutura de repetição quando todas as distâncias de curvas e retas forem armazenadas na lista
 
-
- #Imprime o número de curvas da corrida
+# Imprime o número de curvas da corrida
 
 # Criando a lista de curvas e retas
 while soma_corrida < tamanho_corrida:
@@ -49,64 +85,5 @@ tempo = 60
 # Posição para o modo de ataque
 attack_mode_posicao = random.randint(0, num_curvas)
 
-# Função de temporizador
-   
-
-def temporizador(segundos):
-    global tempo
-    start_time = time.time()
-    while segundos >= 1:
-        mins, secs = divmod(segundos, 60)
-        time.sleep(1)
-        segundos -= 1
-        tempo = 0
-        print(f'segundos restantes {segundos}')
-    print('Tempo acabou')       
-
-# Inicia a thread do temporizador
-thread_temporizador = threading.Thread(target=temporizador, args=(1 * 0,))
-thread_temporizador.start()
-
-# Função para o modo de ataque
-def attack_mode():
-    ganho_vel = random.randint(10, 15)  # Ganho de velocidade devido ao modo de ataque
-    time.sleep(1)
-
-cont = 0 #serve como variavel contadora de tempo (45 min * 60) = 2700s
-curva = 0
-
-# Função para calcular a velocidade dos pilotos
-def velocidade_corredores():
-    global cont, vel_carro, lista_curva_reta
-    #for x in range(len(vel_carro)):
-    for j in range(3):
-        if curva % 2 == 0:  # Curva
-            vel_carro.append(int(random.randint(70, 130) / 3.6))  # Conversão de km/h para m/s            
-        else:  # Reta
-            vel_carro.append(int(random.randint(200, 250) / 3.6))            
-            #time.sleep(1)            
-
-# Função para atualizar a posição dos carros
-def posicao_carro():
-    global cont, curva, vel_carro, posicao, tamanho_corrida
-    while True:
-        velocidade_corredores()
-        for i in range(len(posicao)):
-            posicao[i] += vel_carro[i]
-            if posicao[i] >= math.ceil(soma_corrida):
-                posicao[i] -= math.ceil(soma_corrida)
-                voltas_lista[i] += 1
-                
-
-        if cont >= 60:
-            break
-        vel_carro = []
-        cont += 1
-        curva += 1
-        #time.sleep(1)
-    for k in range(3):        
-        voltas_lista[k] += (posicao[k] / 10000)        
-           
 # Iniciar a corrida        
 posicao_carro()
-
