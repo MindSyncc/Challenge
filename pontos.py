@@ -1,9 +1,7 @@
-# Importar as listas de voltas e posições
 import corrida
-from corrida import voltas_lista, posicao
 
-# Lista de pontos disponíveis para as posições
-pontos = [25, 18, 15]
+
+pontos = (25, 18, 15)
 
 # Dicionário com os corredores e suas voltas
 corredor = {"Nick": voltas_lista[0], "Pascal": voltas_lista[1], "Oliver": voltas_lista[2]}
