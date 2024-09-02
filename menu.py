@@ -1,8 +1,9 @@
-'''Versão 1.0.5'''
+'''Versão 1.0.6'''
 import corrida
-
+import pontos
 
 def menu():
+    "Função do menu"
     print('''Opções do Cartola Formula
     1-Exibir informações da pista?
     2-Simular uma corrida
@@ -37,7 +38,9 @@ def menu():
                 percurso_corrida = corrida.curva_reta(tupla_corrida[1],
                                                       tupla_corrida[2],
                                                       tupla_corrida[0])
-                print(corrida.voltas_corredores(percurso_corrida))
+                num_voltas = corrida.voltas_corredores(percurso_corrida)
+                print(num_voltas)
+                pontos.definir_ganhador(num_voltas)
         case _:
             print('Digite algum número')
             return menu()

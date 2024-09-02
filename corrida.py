@@ -52,10 +52,13 @@ def voltas_corredores(soma_corrida: list):
                 posicao[chave] += math.ceil(random.randint(70, 130) / 3.6)
             print(f'Posicao de {chave} é {posicao[chave]}')
             if posicao[chave] > sum(soma_corrida):
-                voltas[chave] += 1               
+                voltas[chave] += 1
                 posicao[chave] -= sum(soma_corrida)
                 print(f'O piloto {chave} completou uma volta')
         print('='*37)
+    for chave in posicao.keys():
+        posicao[chave] /= sum(soma_corrida)
+        voltas[chave] += round(posicao[chave], 2)
     return voltas
 ''' A fim encontrar a distância aproximada de cada curva em uma corrida,
 a expressão (tamanho_corrida / num_curvas) utilizará o tamanho da corrida e
