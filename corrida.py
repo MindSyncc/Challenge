@@ -30,7 +30,7 @@ def curva_reta(tamanho_corrida, reta, curva) -> list:
        está numa curva ou numa reta'''
     soma_corrida = [0]
     while sum(soma_corrida) <= tamanho_corrida:
-        soma_corrida.append(reta)  
+        soma_corrida.append(reta)
         soma_corrida.append(curva)
     return soma_corrida
 
@@ -58,7 +58,7 @@ def voltas_corredores(soma_corrida: list):
         print('='*37)
     for chave in posicao.keys():
         posicao[chave] /= sum(soma_corrida)
-        voltas[chave] += round(posicao[chave], 2)
+        voltas[chave] += round(posicao[chave], 3)
     return voltas
 ''' A fim encontrar a distância aproximada de cada curva em uma corrida,
 a expressão (tamanho_corrida / num_curvas) utilizará o tamanho da corrida e

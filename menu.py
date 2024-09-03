@@ -42,6 +42,8 @@ def menu():
                 print(num_voltas)
                 pontos.definir_ganhador(num_voltas)
                 menu()
+        case 4:
+            votacao.votar_piloto()
         case 5:
             print('Saindo do programa...')
             exit()
