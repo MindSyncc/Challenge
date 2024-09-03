@@ -1,18 +1,27 @@
-def votar_piloto(dicionario_pilotos: dict):
-    escolha_piloto = {piloto: {'Primeiro': 0, 'Segundo': 0, 'Terceiro': 0} for piloto in dicionario_pilotos}
-    
-    for i in range(2):
-        piloto = list(dicionario_pilotos.keys())[int(input("Escolha o piloto (1-{}): ".format(len(dicionario_pilotos)))) - 1]
-        posicao = ['Primeiro', 'Segundo', 'Terceiro'][int(input("Escolha a posição (1-3): ")) - 1]
-        escolha_piloto[piloto][posicao] += 1
+def votar_piloto():
+    """Função serve para você escolher
+       dois pilotos e você mesmo escolher a posição"""
+    escolha_piloto = {
+        'Nick': {'Primeiro': 0, 'Segundo': 0, 'Terceiro': 0},
+        'Pascal': {'Primeiro': 0, 'Segundo': 0, 'Terceiro': 0},
+        'Oliver': {'Primeiro': 0, 'Segundo': 0, 'Terceiro': 0}
+    }    
+    pilotos = ['Nick', 'Pascal', 'Oliver']
+    posicoes = ['Primeiro', 'Segundo', 'Terceiro']
 
-    for piloto in dicionario_pilotos:
-        if escolha_piloto[piloto]['Primeiro'] == 1 and dicionario_pilotos[piloto] == 25:
-            print(f"Você acertou: {piloto} em 1º lugar!")
-        elif escolha_piloto[piloto]['Segundo'] == 1 and dicionario_pilotos[piloto] == 18:
-            print(f"Você acertou: {piloto} em 2º lugar!")
-        elif escolha_piloto[piloto]['Terceiro'] == 1 and dicionario_pilotos[piloto] == 15:
-            print(f"Você acertou: {piloto} em 3º lugar!")
+    print('Escolha dois pilotos e as suas posições')    
+    for _ in range(2):
+        piloto = int(input('''
+            1-Nick
+            2-Pascal
+            3-Oliver
+            Escolha o número do piloto: ''')) - 1
+        posicao = int(input('''
+            1-Primeiro
+            2-Segundo
+            3-Terceiro
+            Escolha a posição: ''')) - 1
 
-# Teste da função
-votar_piloto({'Nick': 25, 'Pascal': 18, 'Oliver': 15})
+        # Incrementa a posição escolhida para o piloto
+        escolha_piloto[pilotos[piloto]][posicoes[posicao]] += 1
+    return escolha_piloto

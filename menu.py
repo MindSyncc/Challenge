@@ -31,19 +31,19 @@ def menu():
             print('=' * 37)
             menu()
         case 2:
-            if corrida.corrida_estruturada is False:
-                print("Crie o tamanho da corrida primeiro para ela ser avaliada")
+            percurso_corrida = corrida.curva_reta(tupla_corrida[1],
+                                                  tupla_corrida[2],
+                                                  tupla_corrida[0])
+            num_voltas = corrida.voltas_corredores(percurso_corrida)
+            print(num_voltas)
+            pontos.definir_ganhador(num_voltas)
+            menu()
+        case 4:
+            if corrida.corrida_estruturada is True:
+                print('Tá tentando votar depois que a corrida aconteceu? Boa sorte nessa')
                 menu()
             else:
-                percurso_corrida = corrida.curva_reta(tupla_corrida[1],
-                                                      tupla_corrida[2],
-                                                      tupla_corrida[0])
-                num_voltas = corrida.voltas_corredores(percurso_corrida)
-                print(num_voltas)
-                pontos.definir_ganhador(num_voltas)
-                menu()
-        case 4:
-            votacao.votar_piloto()
+                votacao.votar_piloto()
         case 5:
             print('Saindo do programa...')
             exit()
