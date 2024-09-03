@@ -1,6 +1,8 @@
 '''Versão 1.0.6'''
 import corrida
 import pontos
+import votacao
+
 
 def menu():
     "Função do menu"
@@ -40,8 +42,6 @@ def menu():
                 print(num_voltas)
                 pontos.definir_ganhador(num_voltas)
                 menu()
-        case 4:
-
         case 5:
             print('Saindo do programa...')
             exit()
