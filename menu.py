@@ -11,24 +11,22 @@ def menu():
     4-Votacao do piloto
     5-Sair      
     ''')
-    opcoes = int(input(''))
+    opcoes = int(input('Escolha sua opção '))
     tupla_corrida = corrida.estruturar_corrida()
     match opcoes:
         case 1:
+            print('=' * 37)
             for estrutura in range(len(tupla_corrida)):
                 match estrutura:
                     case 0:
                         print(f'O número de curvas será {tupla_corrida[estrutura]}')
-                        print('='*37)
                     case 1:
                         print(f'Uma volta tem {tupla_corrida[estrutura]} metros')
-                        print('='*37)
                     case 2:
                         print(f'O tamanho de cada reta é {tupla_corrida[estrutura]} metros')
-                        print('='*37)
                     case 3:
                         print(f'Cada curva tem  {tupla_corrida[estrutura]} metros ')
-                        print('='*37)
+            print('=' * 37)
             menu()
         case 2:
             if corrida.corrida_estruturada is False:
@@ -41,8 +39,14 @@ def menu():
                 num_voltas = corrida.voltas_corredores(percurso_corrida)
                 print(num_voltas)
                 pontos.definir_ganhador(num_voltas)
+                menu()
+        case 4:
+
+        case 5:
+            print('Saindo do programa...')
+            exit()
         case _:
-            print('Digite algum número')
+            print('Digite algum número dentro das opções')
             return menu()
 
 
