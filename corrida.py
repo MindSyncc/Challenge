@@ -1,6 +1,6 @@
 import random
 import math
-import time
+import time 
 '''
 Todos os valores usados abaixo ainda
 não são baseados em dados coletados de corrida,
@@ -12,11 +12,11 @@ Versão 1.0.6
 corrida_estruturada = False
 
 
-def estruturar_corrida():
+def estruturar_corrida() -> tuple:
     """Essa função serve para estruturar a
        corrida que será simulada pelo usuário"""
     global corrida_estruturada
-    if corrida_estruturada is False:
+    if corrida_estruturada is False:  
         corrida_estruturada = True
     num_curvas = random.randint(10, 20)
     tamanho_corrida = random.randint(2500, 2950)
@@ -35,7 +35,7 @@ def curva_reta(tamanho_corrida, reta, curva) -> list:
     return soma_corrida
 
 
-def voltas_corredores(soma_corrida: list):
+def voltas_corredores(soma_corrida: list) -> dict:
     """Função serve para calcular a posicao
        dos pilotos a cada segundo"""
     posicao = {'nick': 0,

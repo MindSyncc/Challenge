@@ -1,4 +1,4 @@
-def definir_ganhador(corredor: dict):
+def definir_ganhador(corredor: dict) -> None:
     """Essa função define quantos pontos cada piloto ganhará"""
     pontos = (25, 18, 15)
 
