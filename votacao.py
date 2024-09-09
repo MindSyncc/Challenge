@@ -1,27 +1,23 @@
-def votar_piloto():
+escolhas_piloto = {}
+corredores = ['Nick', 'Pascal', 'Oliver']
+
+
+def votar_piloto(escolha_piloto: dict, nome: dict, corredores: list) -> dict:
     """Função serve para você escolher
        dois pilotos e você mesmo escolher a posição"""
-    escolha_piloto = {
-        'Nick': {'Primeiro': 0, 'Segundo': 0, 'Terceiro': 0},
-        'Pascal': {'Primeiro': 0, 'Segundo': 0, 'Terceiro': 0},
-        'Oliver': {'Primeiro': 0, 'Segundo': 0, 'Terceiro': 0}
-    }    
-    pilotos = ['Nick', 'Pascal', 'Oliver']
-    posicoes = ['Primeiro', 'Segundo', 'Terceiro']
+    piloto = int(input('''
+        1-Nick
+        2-Pascal
+        3-Oliver
+        Escolha o número do piloto: '''))
+    posicao = int(input('''
+        1-Primeiro
+        2-Segundo
+        3-Terceiro
+        Escolha a posição: '''))
+    for piloto, posicao in escolha_piloto.items():
+        escolha_piloto[nome] = {piloto: posicao}
 
-    print('Escolha dois pilotos e as suas posições')    
-    for _ in range(2):
-        piloto = int(input('''
-            1-Nick
-            2-Pascal
-            3-Oliver
-            Escolha o número do piloto: ''')) - 1
-        posicao = int(input('''
-            1-Primeiro
-            2-Segundo
-            3-Terceiro
-            Escolha a posição: ''')) - 1
 
-        # Incrementa a posição escolhida para o piloto
-        escolha_piloto[pilotos[piloto]][posicoes[posicao]] += 1
-    return escolha_piloto
+def guardar_voto():
+    """Função serve para armazenar votos"""
