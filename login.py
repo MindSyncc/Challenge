@@ -47,13 +47,12 @@ def cadastrar_usuario(dicionario: dict) -> tuple:
     return dicionario, login_status
 
 
-def login(dicionario: dict):
+def login(dicionario: dict) -> bool:
+    """Esta função faz o login do usuário e retorna o estado de login ativado"""
     login_status = False
-
     nome = input('Digite seu nome completo: ').strip().title()
     nome_usuario_de_entrada = input('Digite o nome de usuário: ')
     senha_de_entrada = input('Digite sua senha: ')
-
 
     while True: 
         if nome in dicionario:
@@ -62,7 +61,7 @@ def login(dicionario: dict):
                 system('cls')
                 print('Login realizado com sucesso!')
                 print(f'Seja bem-vindo(a) de volta {nome}!')
-                return not login_status
+                break
             else:
                 system('clear')
                 system('cls')
@@ -74,7 +73,7 @@ def login(dicionario: dict):
             system('cls')
             print('O nome informado é inválido!')
             nome = input('Digite seu nome novamente: ')
-
+    return not login_status
 
 # O código abaixo é apenas um teste da função cadastrar_usuario e login
 
