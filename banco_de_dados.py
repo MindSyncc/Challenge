@@ -9,7 +9,8 @@ def adicionar_usuario(dicionario: dict, nome_de_usuario: str):
 
 # Função para buscar um usuário pelo nome e exibir apenas o nome e os pontos
 def buscar_usuario(nome_de_usuario: str):
-    """Função para buscar um usuário pelo nome e exibir apenas o nome e os pontos"""
+    """Função para buscar um usuário pelo nome
+    e exibir apenas o nome e os pontos"""
     try:
         with open('banco_de_dados.txt', 'r', encoding='utf-8') as arquivo:
             linhas = arquivo.readlines()  # Lê todas as linhas do arquivo
@@ -30,4 +31,3 @@ dicionario_juan = {'email': 'email@gmail.com', 'senha': 'blabla', 'pontos': 75}
 
 
 buscar_usuario('Pedro')
-

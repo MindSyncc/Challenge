@@ -1,6 +1,6 @@
 import random
 import math
-import time 
+# import time
 '''
 Todos os valores usados abaixo ainda
 não são baseados em dados coletados de corrida,
@@ -60,8 +60,3 @@ def voltas_corredores(soma_corrida: list) -> dict:
         posicao[chave] /= sum(soma_corrida)
         voltas[chave] += round(posicao[chave], 3)
     return voltas
-''' A fim encontrar a distância aproximada de cada curva em uma corrida,
-a expressão (tamanho_corrida / num_curvas) utilizará o tamanho da corrida e
-irá dividi-lá pelo número de curvas
-Obs: o valor da distância de uma curva será correspondente
-ao início de uma curva em uma corrida até o começo de outra'''

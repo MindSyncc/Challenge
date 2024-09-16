@@ -15,7 +15,7 @@ def menu() -> None:
     '''
     opcoes = int(input('Escolha sua opção '))
     tupla_corrida = corrida.estruturar_corrida()
-    dicionario_contas = {}
+    # dicionario_contas = {}
     while True:
         print(mensagem)
         match opcoes:
@@ -34,14 +34,14 @@ def menu() -> None:
                 print('=' * 37)
             case 2:
                 percurso_corrida = corrida.curva_reta(tupla_corrida[1],
-                                                    tupla_corrida[2],
-                                                    tupla_corrida[0])
+                                                     tupla_corrida[2],
+                                                     tupla_corrida[0])
                 num_voltas = corrida.voltas_corredores(percurso_corrida)
                 print(num_voltas)
                 pontos.definir_ganhador(num_voltas)
             case 4:
                 if corrida.corrida_estruturada is True:
-                    print('Tá tentando votar depois que a corrida aconteceu? Boa sorte nessa')
+                    print('Tá tentando votar depois que a corrida aconteceu?')
                 else:
                     votacao.votar_piloto()
             case 5:
