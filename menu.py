@@ -11,10 +11,11 @@ def menu() -> None:
     2-Simular uma corrida
     3-Estatisticas do piloto
     4-Votacao do piloto
-    5-Sair      
+    5-Sair
     '''
     opcoes = int(input('Escolha sua opção '))
     tupla_corrida = corrida.estruturar_corrida()
+    dicionario_contas = {}
     while True:
         print(mensagem)
         match opcoes:
