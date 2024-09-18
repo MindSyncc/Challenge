@@ -1,4 +1,7 @@
-def definir_ganhador(corredor: dict) -> None:
+posicao_corredor = dict()
+
+
+def definir_ganhador(corredor: dict) -> dict:
     """Essa função define quantos pontos cada piloto ganhará"""
     pontos = (25, 18, 15)
 
@@ -12,7 +15,7 @@ def definir_ganhador(corredor: dict) -> None:
     print('='*37)
     # Novo dicionário para armazenar as pontuações de cada corredor
     corredor_pontos = {}
-
+    posicao_corredor = {}
     # Índice para a lista de pontos
     i = 0
 
@@ -20,5 +23,7 @@ def definir_ganhador(corredor: dict) -> None:
     for key, value in corredor.items():
         if i < len(pontos):  # Verifica se ainda há pontos disponíveis na lista
             corredor_pontos[key] = pontos[i]
+            posicao_corredor[key] = i + 1
             print(f'{i+1}°lugar - {key}: {pontos[i]} pontos')
         i += 1  # Incrementa o índice para a próxima posição de pontos
+    return corredor_pontos, posicao_corredor

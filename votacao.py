@@ -1,6 +1,13 @@
-def votar_piloto(escolha_piloto: dict, corredores: list, pontos: int) -> dict:
+escolha_piloto = {}
+corredores = ['Nick', 'Pascal', 'Oliver']
+votacao = False
+
+
+def votar_piloto(escolha_piloto: dict, corredores: list, pontos: int):
     """Função serve para você escolher
        dois pilotos e suas posições."""
+    global votacao
+    votacao = True
     while pontos > 0 and len(escolha_piloto) < 2:
         piloto = int(input('''
             1-Nick
@@ -17,7 +24,8 @@ def votar_piloto(escolha_piloto: dict, corredores: list, pontos: int) -> dict:
             pontos -= 10
         else:
             print("Piloto inválido, tente novamente.")
-    return escolha_piloto, pontos
+
+    return escolha_piloto, pontos, votacao
 
 
 def checar_palpite(escolha_piloto: dict, ganhadores: dict, pontos: int) -> int:
@@ -25,4 +33,5 @@ def checar_palpite(escolha_piloto: dict, ganhadores: dict, pontos: int) -> int:
     for chave, valor in escolha_piloto.items():
         if chave in ganhadores and valor == ganhadores[chave]:
             pontos += 50
+    print(pontos)
     return pontos

@@ -1,6 +1,5 @@
 import random
 import math
-# import time
 '''
 Todos os valores usados abaixo ainda
 não são baseados em dados coletados de corrida,
@@ -16,7 +15,7 @@ def estruturar_corrida() -> tuple:
     """Essa função serve para estruturar a
        corrida que será simulada pelo usuário"""
     global corrida_estruturada
-    if corrida_estruturada is False:  
+    if corrida_estruturada is False:
         corrida_estruturada = True
     num_curvas = random.randint(10, 20)
     tamanho_corrida = random.randint(2500, 2950)
