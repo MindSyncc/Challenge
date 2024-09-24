@@ -4,10 +4,10 @@ import pontos
 import votacao
 import time
 import login
+import banco_de_dados
 
-#dicionario_contas = {}
-
-
+dicionario_contas = {}
+banco_de_dados.preencher_contas(dicionario_contas)
 def menu() -> None:
     "Função do menu"
     mensagem = '''Opções do Cartola Formula
@@ -61,13 +61,16 @@ def menu() -> None:
                 if corrida.corrida_estruturada is True:
                     print('Tá tentando votar depois que a corrida aconteceu?')
                 else:
-                    #Teste
-                    votacao.votar_piloto(votacao.escolha_piloto,
-                                         votacao.corredores, 100)
+                    if login.login_status == True:
+                        votacao.votar_piloto(votacao.escolha_piloto,
+                                            votacao.corredores, 100)
+                    else:
+                        print('Você deve estar logado para votar')
             case 5:
                 login.login_usuario(dicionario_contas)
             case 6:
                 login.cadastrar_usuario(dicionario_contas)
+                banco_de_dados.adicionar_usuario(dicionario_contas)
             case 7:
                 print('Saindo do programa...')
                 break

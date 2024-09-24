@@ -10,6 +10,7 @@ def cadastrar_usuario(dicionario: dict) -> tuple:
     dicionario[nome]['nome_de_usuario'] = input('Digite aqui seu nome de usuário: ')
     dicionario[nome]['email'] = input('Digite seu email: ')
     dicionario[nome]['senha'] = input('Digite sua senha: ')
+    dicionario[nome]['pontos'] = 100
 
     # Exemplo de como deverá ser a variável dicionario_contas:
     """
@@ -75,19 +76,3 @@ def login_usuario(dicionario: dict) -> bool:
             print('O nome informado é inválido!')
             nome = input('Digite seu nome novamente: ')
     return not login_status
-
-# O código abaixo é apenas um teste da função cadastrar_usuario e login
-
-
-# A priori, o dicionário de contas estará vazio e será colocado acima do loop while True na função menu
-dicionario_contas = {}
-
-# Tupla de controle de dados de retorno da função cadastrar_usuario, haja vista que a função retorna dois dados
-tupla_retorno = cadastrar_usuario(dicionario_contas)
-print(login_usuario(dicionario_contas))
-
-# Variávies para armazenar as contas e o status de login
-dicionario_contas = tupla_retorno[0]
-login_status = tupla_retorno[-1]
-
-print(dicionario_contas)

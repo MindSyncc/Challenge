@@ -1,7 +1,1 @@
 Renan,Renan123,email@email, 12434, 87
-
-Juan,Juanito, email@gmail.com,blabla,75
-Pedro,Juanikko, email@gmail.com,blabla,32
-Jorgito,Juanikko, email@gmail.com,blabla,32
-Jorgito,Juanikko,email@gmail.com,blabla,32
-Jorgito,Juanikko,email@gmail.com,blabla,32
