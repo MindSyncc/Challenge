@@ -1,1 +1,2 @@
 Renan,Renan123,email@email, 12434, 87
+Juan,juanito,juan@gmail.com,R9u2s1a7@,100

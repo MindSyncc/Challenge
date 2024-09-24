@@ -8,8 +8,10 @@ import banco_de_dados
 
 dicionario_contas = {}
 banco_de_dados.preencher_contas(dicionario_contas)
+
+
 def menu() -> None:
-    "Função do menu"
+    """Função do menu"""
     mensagem = '''Opções do Cartola Formula
     1-Exibir informações da pista?
     2-Simular uma corrida
@@ -17,7 +19,8 @@ def menu() -> None:
     4-Votacao do piloto
     5-Fazer Login
     6-Cadastro
-    6-Sair
+    7-Deslogar
+    8-Sair
     '''
     global dicionario_contas
     tupla_corrida = None
@@ -61,17 +64,25 @@ def menu() -> None:
                 if corrida.corrida_estruturada is True:
                     print('Tá tentando votar depois que a corrida aconteceu?')
                 else:
-                    if login.login_status == True:
+                    if login.login_status is True:
                         votacao.votar_piloto(votacao.escolha_piloto,
                                             votacao.corredores, 100)
                     else:
                         print('Você deve estar logado para votar')
             case 5:
-                login.login_usuario(dicionario_contas)
+                if login.login_status is False:
+                    login.login_usuario(dicionario_contas)
+                else:
+                    print('Você já está logado')
             case 6:
-                login.cadastrar_usuario(dicionario_contas)
-                banco_de_dados.adicionar_usuario(dicionario_contas)
+                if login.login_status is False:
+                    dicionario_contas, nome_cadastrado, _ = login.cadastrar_usuario(dicionario_contas)
+                    banco_de_dados.adicionar_usuario(dicionario_contas, nome_cadastrado)
+                else:
+                    print('Você já está logado')
             case 7:
+                login.login_status = False
+            case 8:
                 print('Saindo do programa...')
                 break
             case _:

@@ -33,5 +33,6 @@ def checar_palpite(escolha_piloto: dict, ganhadores: dict, pontos: int) -> int:
     for chave, valor in escolha_piloto.items():
         if chave in ganhadores and valor == ganhadores[chave]:
             pontos += 50
+            print(f'Parabens você acertou, você ganhou {50} e está com {pontos}')
     print(pontos)
     return pontos
