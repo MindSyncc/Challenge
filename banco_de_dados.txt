@@ -1,12 +1,3 @@
-Jorge
-email@gmail.com
-blabla
-55
-Juan
-email@gmail.com
-blabla
-25
-Pedro
-email@gmail.com
-blabla
-75
+Renan,email@gmail.com,blabla,34
+Josue,email@gmail.com,blabla,99
+Juan,email@gmail.com,blabla,75

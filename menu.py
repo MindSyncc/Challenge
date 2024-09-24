@@ -3,6 +3,9 @@ import corrida
 import pontos
 import votacao
 import time
+import login
+
+#dicionario_contas = {}
 
 
 def menu() -> None:
@@ -12,9 +15,11 @@ def menu() -> None:
     2-Simular uma corrida
     3-Estatisticas do piloto
     4-Votacao do piloto
-    5-Sair
+    5-Fazer Login
+    6-Cadastro
+    6-Sair
     '''
-    # dicionario_contas = {}
+    global dicionario_contas
     tupla_corrida = None
     corredor_pontos = dict()
     while True:
@@ -60,6 +65,10 @@ def menu() -> None:
                     votacao.votar_piloto(votacao.escolha_piloto,
                                          votacao.corredores, 100)
             case 5:
+                login.login_usuario(dicionario_contas)
+            case 6:
+                login.cadastrar_usuario(dicionario_contas)
+            case 7:
                 print('Saindo do programa...')
                 break
             case _:

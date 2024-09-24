@@ -47,14 +47,15 @@ def cadastrar_usuario(dicionario: dict) -> tuple:
     return dicionario, login_status
 
 
-def login(dicionario: dict) -> bool:
-    """Esta função faz o login do usuário e retorna o estado de login ativado"""
+def login_usuario(dicionario: dict) -> bool:
+    """Esta função faz o login do usuário e
+    retorna o estado de login ativado"""
     login_status = False
     nome = input('Digite seu nome completo: ').strip().title()
     nome_usuario_de_entrada = input('Digite o nome de usuário: ')
     senha_de_entrada = input('Digite sua senha: ')
 
-    while True: 
+    while True:
         if nome in dicionario:
             if nome_usuario_de_entrada == dicionario[nome]['nome_de_usuario'] or senha_de_entrada == dicionario[nome]['senha']:
                 system('clear')
@@ -77,12 +78,13 @@ def login(dicionario: dict) -> bool:
 
 # O código abaixo é apenas um teste da função cadastrar_usuario e login
 
+
 # A priori, o dicionário de contas estará vazio e será colocado acima do loop while True na função menu
 dicionario_contas = {}
 
 # Tupla de controle de dados de retorno da função cadastrar_usuario, haja vista que a função retorna dois dados
 tupla_retorno = cadastrar_usuario(dicionario_contas)
-print(login(dicionario_contas))
+print(login_usuario(dicionario_contas))
 
 # Variávies para armazenar as contas e o status de login
 dicionario_contas = tupla_retorno[0]
