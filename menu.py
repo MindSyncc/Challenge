@@ -4,6 +4,8 @@ import votacao
 import time
 import login
 import banco_de_dados
+from os import system
+
 
 dicionario_contas = {}
 banco_de_dados.preencher_contas(dicionario_contas)
@@ -15,11 +17,11 @@ def menu() -> None:
     1-Exibir informações da pista?
     2-Simular uma corrida
     3-Estatisticas do piloto
-    4-Votacao do piloto
+    4-Votação do piloto (A votação só pode ser feita antes de simular a corrida)
     5-Fazer Login
     6-Cadastro
     7-Deslogar
-    8-Sair
+    8-Sair do programa
     '''
     global dicionario_contas
     tupla_corrida = None
@@ -27,7 +29,7 @@ def menu() -> None:
     corredor_pontos = dict()
     while True:
         print(mensagem)
-        opcoes = int(input('Escolha sua opção '))
+        opcoes = int(input('Escolha sua opção: '))
         match opcoes:
             case 1:
                 if corrida.corrida_estruturada is True:
@@ -60,6 +62,7 @@ def menu() -> None:
                                           nome_cadastrado)
                 else:
                     print('Você não realizou uma função')
+                time.sleep(1.5)
             case 4:
                 if corrida.corrida_estruturada is True:
                     print('Tá tentando votar depois que a corrida aconteceu?')
@@ -71,24 +74,30 @@ def menu() -> None:
                         banco_de_dados.atualizar_pontos_usuario(dicionario_contas, nome_cadastrado)  # Salvando no arquivo
                     else:
                         print('Você deve estar logado para votar')
+                time.sleep(1.5)
             case 5:
                 if login.login_status is False:
                     _, nome_cadastrado = login.login_usuario(dicionario_contas)
                 else:
                     print('Você já está logado')
+                time.sleep(1.5)
             case 6:
                 if login.login_status is False:
                     dicionario_contas, nome_cadastrado, _ = login.cadastrar_usuario(dicionario_contas)
                     banco_de_dados.adicionar_usuario(dicionario_contas, nome_cadastrado)
                 else:
                     print('Você já está logado')
+                time.sleep(1.5)
             case 7:
                 login.login_status = False
+                print('Deslogado com sucesso!')
             case 8:
                 print('Saindo do programa...')
+                time.sleep(1.5)
                 break
             case _:
                 print('Digite algum número dentro das opções')
+                time.sleep(1.5)
 
 
 menu()
