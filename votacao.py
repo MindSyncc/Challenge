@@ -1,3 +1,6 @@
+import time
+from os import system
+
 escolha_piloto = {}
 corredores = ['Nick', 'Pascal', 'Oliver']
 votacao = False
@@ -7,12 +10,17 @@ def votar_piloto(escolha_piloto: dict, corredores: list, pontos: int):
        dois pilotos e suas posições."""
     global votacao
     votacao = True
+    system('clear')
+    time.sleep(1)
+    print('-=' * 40)
+    print('Escolha dois pilotos e tente adivinhar qual posição ele alcançará!')
+    print('Mas escolha com cautela, pois a escolha errada implicará na perca de pontos ')
     while pontos > 0 and len(escolha_piloto) < 2:
         piloto = int(input('''
             1-Nick
             2-Pascal
             3-Oliver
-            Escolha o número do piloto: ''')) - 1
+            Escolha o piloto desejado: ''')) - 1
         posicao = int(input('''
             1-Primeiro
             2-Segundo
@@ -23,6 +31,7 @@ def votar_piloto(escolha_piloto: dict, corredores: list, pontos: int):
             pontos -= 10
         else:
             print("Piloto inválido, tente novamente.")
+        print('-=' * 40)
 
     return escolha_piloto, pontos, votacao
 

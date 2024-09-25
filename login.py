@@ -47,28 +47,32 @@ def login_usuario(dicionario: dict) -> tuple:
     """Esta função faz o login do usuário e
     retorna o estado de login ativado"""
     global login_status
-    login_status = True
     nome = input('Digite seu nome completo: ').strip().title()
     nome_usuario_de_entrada = input('Digite o nome de usuário: ')
     senha_de_entrada = input('Digite sua senha: ')
 
-    while True:
+    tentativas = 0
+    while tentativas < 3:
         if nome in dicionario:
-            if nome_usuario_de_entrada == dicionario[nome]['nome_de_usuario'] or senha_de_entrada == dicionario[nome]['senha']:
+            if nome_usuario_de_entrada == dicionario[nome]['nome_de_usuario'] and senha_de_entrada == dicionario[nome]['senha']:
                 system('clear')
                 system('cls')
                 print('Login realizado com sucesso!')
                 print(f'Seja bem-vindo(a) de volta {nome}!')
-                break
+                login_status = True
+                return login_status, nome
             else:
                 system('clear')
                 system('cls')
                 print('Nome de usuário ou senha foram digitados incorretamente!')
                 nome_usuario_de_entrada = input('Digite o nome de usuário novamente: ')
                 senha_de_entrada = input('Digite sua senha novamente: ')
+                tentativas += 1
         else:
             system('clear')
             system('cls')
             print('O nome informado é inválido!')
             nome = input('Digite seu nome novamente: ')
+            tentativas += 1
+    print('Você excedeu o número de tentativas. Por favor, tente novamente mais tarde')
     return login_status, nome

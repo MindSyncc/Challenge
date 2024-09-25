@@ -14,6 +14,7 @@ def preencher_contas(dicionario: dict) -> dict:
             dicionario[usuario] = {lista[i - 1]: dados[i] for i in range(1, 5)}
     return dicionario
 
+
 def adicionar_usuario(dicionario: dict, nome: str):
     """Função para adicionar um usuário ao arquivo
     em uma única linha separada por vírgulas"""
@@ -21,6 +22,7 @@ def adicionar_usuario(dicionario: dict, nome: str):
     with open('banco_de_dados.txt', 'a', encoding='utf-8') as arquivo:
         arquivo.write(f'{nome},{usuario_info["nome_de_usuario"]},{usuario_info["email"]},{usuario_info["senha"]},{usuario_info["pontos"]}\n')
     print(f'Usuário {usuario_info["nome_de_usuario"]} adicionado ao banco de dados!')
+
 
 def atualizar_pontos_usuario(dicionario: dict, nome: str):
     """Função para atualizar os pontos do usuário no arquivo de banco de dados"""
@@ -42,6 +44,7 @@ def atualizar_pontos_usuario(dicionario: dict, nome: str):
         arquivo.writelines(linhas_atualizadas)
 
     print(f'Pontos do usuário {usuario_info["nome_de_usuario"]} atualizados no banco de dados!')
+
 
 def buscar_usuario(nome: str):
     """Função para buscar um usuário pelo nome e exibir o nome e os pontos"""
