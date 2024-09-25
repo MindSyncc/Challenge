@@ -65,10 +65,10 @@ def menu() -> None:
                     print('Tá tentando votar depois que a corrida aconteceu?')
                 else:
                     if login.login_status is True:
-                        pontos_usuario = int(dicionario_contas[nome_cadastrado]['pontos'])  # Pegando os pontos do usuário
+                        pontos_usuario = int(dicionario_contas[nome_cadastrado]['pontos'])
                         escolha_piloto, pontos_usuario, votacao.votacao = votacao.votar_piloto(votacao.escolha_piloto, votacao.corredores, pontos_usuario)
-                        dicionario_contas[nome_cadastrado]['pontos'] = str(pontos_usuario)  # Atualizando os pontos no dicionário
-                        banco_de_dados.atualizar_pontos_usuario(dicionario_contas, nome_cadastrado)  # Salvando no arquivo
+                        dicionario_contas[nome_cadastrado]['pontos'] = str(pontos_usuario)
+                        banco_de_dados.atualizar_pontos_usuario(dicionario_contas, nome_cadastrado)
                     else:
                         print('Você deve estar logado para votar')
             case 5:
