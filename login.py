@@ -1,12 +1,13 @@
 import re
 from os import system
 
-login_status = None
+login_status = False
+
+
 def cadastrar_usuario(dicionario: dict) -> tuple:
     """Esta função cadastra um usuário e retorna uma tupla
     com um dicionário de contas criadas, o nome do usuário e o status de login."""
     global login_status
-    login_status = False
     nome = input('Digite aqui seu nome completo: ').strip().title()
     dicionario[nome] = {}
     dicionario[nome]['nome_de_usuario'] = input('Digite aqui seu nome de usuário: ')
@@ -42,11 +43,11 @@ def cadastrar_usuario(dicionario: dict) -> tuple:
     return dicionario, nome, login_status  # Retorna dicionário, nome e status de login
 
 
-
-def login_usuario(dicionario: dict) -> bool:
+def login_usuario(dicionario: dict) -> tuple:
     """Esta função faz o login do usuário e
     retorna o estado de login ativado"""
-    login_status = False
+    global login_status
+    login_status = True
     nome = input('Digite seu nome completo: ').strip().title()
     nome_usuario_de_entrada = input('Digite o nome de usuário: ')
     senha_de_entrada = input('Digite sua senha: ')
@@ -70,4 +71,4 @@ def login_usuario(dicionario: dict) -> bool:
             system('cls')
             print('O nome informado é inválido!')
             nome = input('Digite seu nome novamente: ')
-    return not login_status
+    return login_status, nome

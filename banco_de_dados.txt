@@ -1,2 +1,3 @@
-Renan,Renan123,email@email, 12434, 87
+Renan,Renan123,email@email,12434,27
 Juan,juanito,juan@gmail.com,R9u2s1a7@,100
+Fernando,Fefe,fernando@fernando.fernando,FerNando7@,80

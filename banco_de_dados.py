@@ -22,6 +22,27 @@ def adicionar_usuario(dicionario: dict, nome: str):
         arquivo.write(f'{nome},{usuario_info["nome_de_usuario"]},{usuario_info["email"]},{usuario_info["senha"]},{usuario_info["pontos"]}\n')
     print(f'Usuário {usuario_info["nome_de_usuario"]} adicionado ao banco de dados!')
 
+def atualizar_pontos_usuario(dicionario: dict, nome: str):
+    """Função para atualizar os pontos do usuário no arquivo de banco de dados"""
+    usuario_info = dicionario[nome]
+    linhas_atualizadas = []
+
+    with open('banco_de_dados.txt', 'r', encoding='utf-8') as arquivo:
+        linhas = arquivo.readlines()
+    
+    for linha in linhas:
+        dados = linha.strip().split(',')
+        if dados[0] == nome:
+            linha_atualizada = f'{nome},{usuario_info["nome_de_usuario"]},{usuario_info["email"]},{usuario_info["senha"]},{usuario_info["pontos"]}\n'
+            linhas_atualizadas.append(linha_atualizada)
+        else:
+            linhas_atualizadas.append(linha)
+    
+    with open('banco_de_dados.txt', 'w', encoding='utf-8') as arquivo:
+        arquivo.writelines(linhas_atualizadas)
+
+    print(f'Pontos do usuário {usuario_info["nome_de_usuario"]} atualizados no banco de dados!')
+
 def buscar_usuario(nome: str):
     """Função para buscar um usuário pelo nome e exibir o nome e os pontos"""
     try:
@@ -36,13 +57,3 @@ def buscar_usuario(nome: str):
             print(f'Usuário {nome} não encontrado.')
     except FileNotFoundError:
         print('Arquivo não encontrado.')
-
-dicionario_juan = {
-    'Jorgito': {
-        'nome_de_usuario': 'Juanikko',
-        'email': 'email@gmail.com',
-        'senha': 'blabla',
-        'pontos': 32
-    }
-}
-

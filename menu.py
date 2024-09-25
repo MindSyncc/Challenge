@@ -1,4 +1,3 @@
-'''Versão 1.0.6'''
 import corrida
 import pontos
 import votacao
@@ -24,6 +23,7 @@ def menu() -> None:
     '''
     global dicionario_contas
     tupla_corrida = None
+    nome_cadastrado = None
     corredor_pontos = dict()
     while True:
         print(mensagem)
@@ -57,7 +57,7 @@ def menu() -> None:
                 if votacao.votacao is True:
                     votacao.checar_palpite(votacao.escolha_piloto,
                                           pontos.posicao_corredor,
-                                          100)
+                                          nome_cadastrado)
                 else:
                     print('Você não realizou uma função')
             case 4:
@@ -65,13 +65,15 @@ def menu() -> None:
                     print('Tá tentando votar depois que a corrida aconteceu?')
                 else:
                     if login.login_status is True:
-                        votacao.votar_piloto(votacao.escolha_piloto,
-                                            votacao.corredores, 100)
+                        pontos_usuario = int(dicionario_contas[nome_cadastrado]['pontos'])  # Pegando os pontos do usuário
+                        escolha_piloto, pontos_usuario, votacao.votacao = votacao.votar_piloto(votacao.escolha_piloto, votacao.corredores, pontos_usuario)
+                        dicionario_contas[nome_cadastrado]['pontos'] = str(pontos_usuario)  # Atualizando os pontos no dicionário
+                        banco_de_dados.atualizar_pontos_usuario(dicionario_contas, nome_cadastrado)  # Salvando no arquivo
                     else:
                         print('Você deve estar logado para votar')
             case 5:
                 if login.login_status is False:
-                    login.login_usuario(dicionario_contas)
+                    _, nome_cadastrado = login.login_usuario(dicionario_contas)
                 else:
                     print('Você já está logado')
             case 6:
