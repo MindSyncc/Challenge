@@ -35,7 +35,7 @@ def votar_piloto(escolha_piloto: dict, corredores: list, pontos: int):
 
     return escolha_piloto, pontos, votacao
 
-
+                   # {nick: 1, oliver: 3}  
 def checar_palpite(escolha_piloto: dict, ganhadores: dict, usuario: str) -> int:
     """Função serve para checar se acertou o palpite"""
     with open('banco_de_dados.txt', 'r', encoding='utf-8') as arquivo:
@@ -44,10 +44,12 @@ def checar_palpite(escolha_piloto: dict, ganhadores: dict, usuario: str) -> int:
             dados = linha.strip().split(',')
             if dados[0] == usuario:
                 pontos = dados[-1]
+    contador = 1
     for chave, valor in escolha_piloto.items():
         if chave in ganhadores and valor == ganhadores[chave]:
             pontos += 50
-            print(f'Parabens você acertou, você ganhou {50} e está com {pontos}')
+            print(f'{contador}° palpite: Parabens você acertou, você ganhou {50} e está com {pontos}')
         else:
-            print(f'Você errou, agora está com {pontos} pontos')
+            print(f'{contador}° palpite: Você errou, agora está com {pontos} pontos')
+        contador += 1
     return pontos
