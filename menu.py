@@ -59,10 +59,11 @@ def menu() -> None:
                                                      tupla_corrida[0])
                 num_voltas = corrida.voltas_corredores(percurso_corrida)
                 print('RESULTADO FINAL DA CORRIDA')
-                corredor_pontos = pontos.definir_ganhador(num_voltas)
+                corredor_pontos, posicao_corredor = pontos.definir_ganhador(num_voltas)
                 if votacao.votacao is True:
+
                     votacao.checar_palpite(votacao.escolha_piloto,
-                                          pontos.posicao_corredor,
+                                          posicao_corredor,
                                           nome_cadastrado)
                 else:
                     print('\nVocê não participou do processo de votação.')

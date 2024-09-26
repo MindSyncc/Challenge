@@ -1,7 +1,4 @@
-posicao_corredor = dict()
-
-
-def definir_ganhador(corredor: dict) -> dict:
+def definir_ganhador(corredor: dict) -> tuple:
     """Essa função define quantos pontos cada piloto ganhará"""
     pontos = (25, 18, 15)
 

@@ -37,12 +37,12 @@ def curva_reta(tamanho_corrida, reta, curva) -> list:
 def voltas_corredores(soma_corrida: list) -> dict:
     """Função serve para calcular a posicao
        dos pilotos a cada segundo"""
-    posicao = {'nick': 0,
-               'pascal': 0,
-               'oliver': 0}
-    voltas = {'nick': 0,
-              'pascal': 0,
-              'oliver': 0}
+    posicao = {'Nick': 0,
+               'Pascal': 0,
+               'Oliver': 0}
+    voltas = {'Nick': 0,
+              'Pascal': 0,
+              'Oliver': 0}
     for i in range(200):
         for chave in posicao.keys():
             if i % 2 == 0:
