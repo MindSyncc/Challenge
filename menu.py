@@ -46,12 +46,12 @@ def menu() -> None:
                             case 3:
                                 print(f'Cada curva tem {tupla_corrida[estrutura]} metros ')
                     print('=' * 37)
-                    time.sleep(5)
+                    time.sleep(4.5)
                 else:
                     print('A corrida ainda não foi simulada.')
                     print('Clique na opção "Simular uma corrida" para visualizar as informações da pista.')
                     print('ATENÇÃO: Caso a corrida seja simulada antes de sua votação. Você perderá a oportunidade de votar.')
-                    time.sleep(15)
+                    time.sleep(5)
             case 2:
                 tupla_corrida = corrida.estruturar_corrida()
                 percurso_corrida = corrida.curva_reta(tupla_corrida[1],
@@ -68,16 +68,24 @@ def menu() -> None:
                 else:
                     print('\nVocê não participou do processo de votação.')
                     print('Portanto, não poderá votar depois.')
-                time.sleep(10)
+                time.sleep(5)
             case 4:
                 if corrida.corrida_estruturada is True:
-                    print('Tá tentando votar depois que a corrida aconteceu?')
+                    print('''A corrida já aconteceu, você já não pode mais votar.
+Deseja reiniciar a corrida?''')
+                    opcao = int(input('1 - Sim\n2 - Não\n'))
+                    if opcao == 1:
+                        corrida.corrida_estruturada = False
+                        votacao.escolha_piloto = {}
+                        print('Corrida reiniciada')
+                    else:
+                        print('Não houve reinicio.')
                 else:
                     if login.login_status is True:
-                        pontos_usuario = int(dicionario_contas[nome_cadastrado]['pontos'])  # Pegando os pontos do usuário
+                        pontos_usuario = int(dicionario_contas[nome_cadastrado]['pontos'])
                         escolha_piloto, pontos_usuario, votacao.votacao = votacao.votar_piloto(votacao.escolha_piloto, votacao.corredores, pontos_usuario)
-                        dicionario_contas[nome_cadastrado]['pontos'] = str(pontos_usuario)  # Atualizando os pontos no dicionário
-                        banco_de_dados.atualizar_pontos_usuario(dicionario_contas, nome_cadastrado)  # Salvando no arquivo
+                        dicionario_contas[nome_cadastrado]['pontos'] = str(pontos_usuario) 
+                        banco_de_dados.atualizar_pontos_usuario(dicionario_contas, nome_cadastrado)
                     else:
                         print('Você deve estar logado para votar')
                 time.sleep(2.5)
@@ -100,7 +108,7 @@ def menu() -> None:
                 else:
                     login.login_status = False
                     print('Deslogado com sucesso!')
-                time.sleep(4)
+                time.sleep(3)
             case 8:
                 print('Saindo do programa...')
                 time.sleep(2)
