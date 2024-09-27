@@ -1,7 +1,4 @@
-posicao_corredor = dict()
-
-
-def definir_ganhador(corredor: dict) -> dict:
+def definir_ganhador(corredor: dict) -> tuple:
     """Essa função define quantos pontos cada piloto ganhará"""
     pontos = (25, 18, 15)
 
@@ -19,6 +16,7 @@ def definir_ganhador(corredor: dict) -> dict:
     # Índice para a lista de pontos
     i = 0
 
+    print('PÓDIO: \n')
     # Inserir no novo dicionário os pontos
     for key, value in corredor.items():
         if i < len(pontos):  # Verifica se ainda há pontos disponíveis na lista

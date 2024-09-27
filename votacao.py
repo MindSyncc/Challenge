@@ -27,6 +27,7 @@ def votar_piloto(escolha_piloto: dict, corredores: list, pontos: int):
             2-Segundo
             3-Terceiro
             Escolha a posição: '''))
+
         if 0 <= piloto < len(corredores):
             escolha_piloto[corredores[piloto]] = posicao
             pontos -= 10
@@ -38,17 +39,37 @@ def votar_piloto(escolha_piloto: dict, corredores: list, pontos: int):
 
 
 def checar_palpite(escolha_piloto: dict, ganhadores: dict, usuario: str) -> int:
-    """Função serve para checar se acertou o palpite"""
+    """Função serve para checar se acertou o palpite e atualizar os pontos no banco de dados"""
+    linhas = []
+    pontos = 0
+
+    # Lendo o arquivo e encontrando o usuário
     with open('banco_de_dados.txt', 'r', encoding='utf-8') as arquivo:
         linhas = arquivo.readlines()
-        for linha in linhas:
-            dados = linha.strip().split(',')
-            if dados[0] == usuario:
-                pontos = dados[-1]
-    for chave, valor in escolha_piloto.items():
-        if chave in ganhadores and valor == ganhadores[chave]:
-            pontos += 50
-            print(f'Parabens você acertou, você ganhou {50} e está com {pontos}')
-        else:
-            print(f'Você errou, agora está com {pontos} pontos')
+
+    # Buscando o usuário e atualizando os pontos
+    for i, linha in enumerate(linhas):
+        dados = linha.strip().split(',')
+        if dados[0] == usuario:
+            pontos = int(dados[-1])  # Pega a pontuação atual do usuário
+            contador = 1
+
+            # Checando os palpites
+            for chave, valor in escolha_piloto.items():
+                if chave in ganhadores and valor == ganhadores[chave]:
+                    pontos += 50
+                    print(f'{contador}° palpite: Parabéns! Você acertou. Ganhou 50 pontos e está com {pontos}.')
+                else:
+                    print(f'{contador}° palpite: Você errou. Agora está com {pontos} pontos.')
+                contador += 1
+
+            # Atualizando a pontuação do usuário no arquivo
+            dados[-1] = str(pontos)
+            linhas[i] = ','.join(dados) + '\n'
+            break
+
+    # Escrevendo os dados atualizados de volta no arquivo
+    with open('banco_de_dados.txt', 'w', encoding='utf-8') as arquivo:
+        arquivo.writelines(linhas)
+
     return pontos
