@@ -5,6 +5,7 @@ escolha_piloto = {}
 corredores = ['Nick', 'Pascal', 'Oliver']
 votacao = False
 
+
 def votar_piloto(escolha_piloto: dict, corredores: list, pontos: int):
     """Função serve para você escolher
        dois pilotos e suas posições."""

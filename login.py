@@ -6,7 +6,8 @@ login_status = False
 
 def cadastrar_usuario(dicionario: dict) -> tuple:
     """Esta função cadastra um usuário e retorna uma tupla
-    com um dicionário de contas criadas, o nome do usuário e o status de login."""
+    com um dicionário de contas criadas, o nome do usuário
+    e o status de login."""
     global login_status
     nome = input('Digite aqui seu nome completo: ').strip().title()
     dicionario[nome] = {}

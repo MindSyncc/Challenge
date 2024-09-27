@@ -28,18 +28,15 @@ def atualizar_pontos_usuario(dicionario: dict, nome: str):
     """Função para atualizar os pontos do usuário no arquivo de banco de dados"""
     usuario_info = dicionario[nome]
     linhas_atualizadas = []
-
     with open('banco_de_dados.txt', 'r', encoding='utf-8') as arquivo:
-        linhas = arquivo.readlines()
-    
+        linhas = arquivo.readlines()  
     for linha in linhas:
         dados = linha.strip().split(',')
         if dados[0] == nome:
             linha_atualizada = f'{nome},{usuario_info["nome_de_usuario"]},{usuario_info["email"]},{usuario_info["senha"]},{usuario_info["pontos"]}\n'
             linhas_atualizadas.append(linha_atualizada)
         else:
-            linhas_atualizadas.append(linha)
-    
+            linhas_atualizadas.append(linha)  
     with open('banco_de_dados.txt', 'w', encoding='utf-8') as arquivo:
         arquivo.writelines(linhas_atualizadas)
 
