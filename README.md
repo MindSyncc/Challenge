@@ -1,34 +1,58 @@
-Integrantes da empresa MindSync:
-Fernando Carlos Colque Huaranca - rm558095
+# Simulador de Corrida - Versão 1.0.8
 
-Heloísa Fleury Jardim - rm556378
+**Equipe MindSync:**
+- **Fernando Carlos Colque Huaranca** - RM558095
+- **Heloísa Fleury Jardim** - RM556378
+- **Juan Fuentes Rufino** - RM557673
+- **Julia Carolina Ferreira Silva** - RM558896
+- **Pedro Batista** - RM558137
 
-Juan Fuentes Rufino - rm557673
+## Descrição do Projeto
 
-Julia Carolina Ferreira Silva - rm558896
+Este projeto é um simulador de corrida inspirado em parâmetros aproximados da Fórmula E. Ele inclui funcionalidades como gerenciamento de usuários, simulação de corridas, cálculo de pontuações e um menu interativo. A versão atual (1.0.8) também traz melhorias nas funcionalidades de votação de pilotos e no sistema de login, além de otimizações no código para melhor desempenho.
 
-Pedro Batista - rm558137
+## Estrutura do Projeto
 
-Descrição
-Este projeto simula uma corrida baseada em parâmetros aproximados da Fórmula E. 
-Ele inclui um menu para iniciar a corrida, calcula a velocidade dos pilotos, 
-atualiza suas posições ao longo da corrida, e ao final, pontua os pilotos de acordo com suas colocações.
+O projeto é composto pelos seguintes arquivos principais:
 
-Estrutura do Projeto
-O projeto é composto por três arquivos principais:
+- **menu.py:** Gerencia o menu principal do simulador, oferecendo opções como iniciar a corrida, visualizar estatísticas dos pilotos e votar. Integra-se ao sistema de pontuação dos pilotos.
+- **corrida.py:** Contém a lógica da simulação de corrida, calculando as velocidades dos pilotos e atualizando suas posições com base em fatores aleatórios.
+- **pontos.py:** Gerencia o sistema de pontuação dos pilotos, distribuindo pontos conforme o desempenho de cada piloto nas corridas.
+- **banco_de_dados.py:** Armazena dados dos usuários, como login, pontuação e outras informações, utilizando um arquivo de texto para persistência dos dados.
+- **votacao.py:** Implementa o sistema de votação, permitindo que os usuários escolham e votem em seus pilotos preferidos antes da corrida.
 
-menu.py: Gerencia o menu inicial para iniciar a corrida.
-corrida.py: Contém a lógica principal da simulação da corrida.
-pontos.py: Calcula e exibe a pontuação final dos pilotos.
+## Funcionalidades
 
-Considerações Finais
-Versão: 1.0.5
-Este projeto utiliza dados aproximados da Fórmula E e será aprimorado com dados mais precisos em versões futuras.
-O código atual simula uma corrida simples e atribui pontos com base na distância percorrida pelos pilotos.
+- **Simulação de corrida:** A corrida é simulada com base em dados gerados aleatoriamente, considerando diferentes trechos da pista que afetam a velocidade dos pilotos.
+- **Sistema de votação:** Os usuários podem votar em seus pilotos favoritos antes da corrida, com o resultado armazenado e validado corretamente.
+- **Gerenciamento de usuários:** O sistema permite que os usuários façam login, armazenando seus pontos e outras informações relevantes.
+- **Cálculo de pontuação:** Os pilotos recebem pontos com base em suas posições finais na corrida.
+- **Menu interativo:** O menu oferece opções para iniciar corridas, votar e visualizar informações sobre pilotos e pontuações.
 
-Aplicação Atual: O projeto atual usa dados gerados aleatoriamente para simular uma corrida. 
-É uma versão simplificada que não se baseia em dados reais de corridas, mas oferece uma visão básica de como uma corrida de Fórmula E pode ser simulada.
+## Versão Atual: 1.0.8
 
-Futuras Melhorias: Em futuras versões, o projeto pode ser aprimorado com dados mais precisos e consistentes de corridas reais, 
-melhorias no algoritmo de cálculo de velocidade e simulação de condições mais realistas 
-(como mudanças climáticas, a adição do "attack mode" e a probabilidade de cada corredor vencer a corrida).
+A versão 1.0.8 traz uma série de melhorias no código, incluindo:
+
+- Adição de login e usuário e um pequeno banco de dados, onde será armazenado os pontos de cada participante.
+- Melhorias no sistema de votação de pilotos, com validação mais robusta e integração com o banco de dados de usuários.
+- Otimização da simulação de corrida para melhor desempenho e eficiência no uso dos dados.
+- Reorganização de funções para garantir que os dados da corrida sejam processados de forma mais eficiente, especialmente na criação da tupla com informações da pista.
+- Além de um menu interativo convidativo.
+
+## Futuras Melhorias
+
+- **Simulação mais realista:** Integração de dados reais da Fórmula E para tornar a simulação mais precisa e imersiva.
+- **Condições dinâmicas de corrida:** Implementação de variáveis como mudanças climáticas e "attack mode", que influenciam diretamente o desempenho dos pilotos.
+- **Melhorias no sistema de votação:** Ampliar as opções de interação dos usuários com o sistema de votação, trazendo mais variáveis de escolha.
+- **Adição de mais pilotos e equipes:** Serão adicionados mais pilotos e equipes para que possam ser escolhidas para que seja mais abrangente as escolhas do usuário.
+
+## Como Executar o Projeto
+
+1. Clone este repositório.
+2. Certifique-se de ter o Python instalado em sua máquina.
+3. Execute o arquivo `menu.py` para iniciar o simulador de corrida.
+4. Navegue pelas opções do menu para iniciar corridas, votar em pilotos e visualizar a pontuação.
+
+## Conclusão
+
+O **Simulador de Corrida** versão 1.0.8 oferece uma base sólida para a simulação de corridas, com sistemas de pontuação e votação funcionais e interativos. O projeto está em evolução, com futuras versões planejadas para trazer mais realismo e funcionalidades adicionais.
