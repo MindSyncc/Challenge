@@ -49,7 +49,7 @@ def votar_piloto(escolha_piloto: dict, corredores: list, pontos: int):
             print("Entrada inválida. Por favor, insira um número.")
         print('-=' * 40)
 
-    return escolha_piloto, pontos, votacao
+    return pontos, votacao
 
 
 def checar_palpite(escolha_piloto: dict, ganhadores: dict, usuario: str) -> int:

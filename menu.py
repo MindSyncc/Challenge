@@ -25,7 +25,6 @@ def menu() -> None:
     global dicionario_contas
     tupla_corrida = None
     nome_cadastrado = None
-    corredor_pontos = dict()
 
     while True:
         system('clear')
@@ -66,7 +65,7 @@ def menu() -> None:
                                                      tupla_corrida[0])
                 num_voltas = corrida.voltas_corredores(percurso_corrida)
                 print('RESULTADO FINAL DA CORRIDA')
-                corredor_pontos, posicao_corredor = pontos.definir_ganhador(num_voltas)
+                posicao_corredor = pontos.definir_ganhador(num_voltas)
                 if votacao.votacao is True:
                     votacao.checar_palpite(votacao.escolha_piloto,
                                           posicao_corredor,
@@ -99,7 +98,7 @@ Deseja reiniciar a corrida?''')
                         except (KeyError, ValueError):
                             print("Erro ao acessar os pontos do usuário. Verifique se o usuário está logado corretamente.")
                             continue
-                        escolha_piloto, pontos_usuario, votacao.votacao = votacao.votar_piloto(
+                        pontos_usuario, votacao.votacao = votacao.votar_piloto(
                             votacao.escolha_piloto, votacao.corredores, pontos_usuario)
                         dicionario_contas[nome_cadastrado]['pontos'] = str(pontos_usuario)
                         banco_de_dados.atualizar_pontos_usuario(dicionario_contas, nome_cadastrado)

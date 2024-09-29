@@ -24,4 +24,4 @@ def definir_ganhador(corredor: dict) -> tuple:
             posicao_corredor[key] = i + 1
             print(f'{i+1}°lugar - {key}: {pontos[i]} pontos')
         i += 1  # Incrementa o índice para a próxima posição de pontos
-    return corredor_pontos, posicao_corredor
+    return posicao_corredor
