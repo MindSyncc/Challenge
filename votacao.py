@@ -16,6 +16,10 @@ def votar_piloto(escolha_piloto: dict, corredores: list, pontos: int):
     print('-=' * 40)
     print('Escolha dois pilotos e tente adivinhar qual posição ele alcançará!')
     print('Mas escolha com cautela, pois a escolha errada implicará na perda de pontos ')
+    
+    pilotos_escolhidos = []
+    posicoes_escolhidas = []
+
     while pontos > 0 and len(escolha_piloto) < 2:
         try:
             piloto = int(input('''
@@ -23,21 +27,23 @@ def votar_piloto(escolha_piloto: dict, corredores: list, pontos: int):
                 2-Pascal
                 3-Oliver
                 Escolha o piloto desejado: ''')) - 1
-            
-            if 0 <= piloto < len(corredores):
+
+            if 0 <= piloto < len(corredores) and corredores[piloto] not in pilotos_escolhidos:
                 posicao = int(input('''
                     1-Primeiro
                     2-Segundo
                     3-Terceiro
                     Escolha a posição: '''))
 
-                if 1 <= posicao <= 3:
+                if 1 <= posicao <= 3 and posicao not in posicoes_escolhidas:
                     escolha_piloto[corredores[piloto]] = posicao
+                    pilotos_escolhidos.append(corredores[piloto])
+                    posicoes_escolhidas.append(posicao)
                     pontos -= 10
                 else:
-                    print("Posição inválida. Escolha entre 1 (Primeiro), 2 (Segundo) ou 3 (Terceiro).")
+                    print("Posição inválida ou já escolhida. Escolha uma posição disponível entre 1 (Primeiro), 2 (Segundo) ou 3 (Terceiro).")
             else:
-                print("Piloto inválido. Escolha um número de 1 a 3.")
+                print("Piloto inválido ou já escolhido. Escolha um piloto disponível.")
 
         except ValueError:
             print("Entrada inválida. Por favor, insira um número.")
@@ -52,22 +58,18 @@ def checar_palpite(escolha_piloto: dict, ganhadores: dict, usuario: str) -> int:
     pontos = 0
 
     try:
-        # Lendo o arquivo e encontrando o usuário
         with open('banco_de_dados.txt', 'r', encoding='utf-8') as arquivo:
             linhas = arquivo.readlines()
 
-        # Buscando o usuário e atualizando os pontos
         for i, linha in enumerate(linhas):
             dados = linha.strip().split(',')
             if dados[0] == usuario:
                 try:
-                    pontos = int(dados[-1])  # Pega a pontuação atual do usuário
+                    pontos = int(dados[-1])
                 except ValueError:
                     print("Erro ao ler os pontos do usuário. Definindo pontos como 0.")
                     pontos = 0
-
                 contador = 1
-                # Checando os palpites
                 for chave, valor in escolha_piloto.items():
                     if chave in ganhadores and valor == ganhadores[chave]:
                         pontos += 50
@@ -75,16 +77,11 @@ def checar_palpite(escolha_piloto: dict, ganhadores: dict, usuario: str) -> int:
                     else:
                         print(f'{contador}° palpite: Você errou. Agora está com {pontos} pontos.')
                     contador += 1
-
-                # Atualizando a pontuação do usuário no arquivo
                 dados[-1] = str(pontos)
                 linhas[i] = ','.join(dados) + '\n'
                 break
-
-        # Escrevendo os dados atualizados de volta no arquivo
         with open('banco_de_dados.txt', 'w', encoding='utf-8') as arquivo:
             arquivo.writelines(linhas)
-
     except FileNotFoundError:
         print("Erro: O arquivo 'banco_de_dados.txt' não foi encontrado.")
     return pontos

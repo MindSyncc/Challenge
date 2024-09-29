@@ -16,12 +16,11 @@ def menu() -> None:
     mensagem = '''Opções do Cartola Formula
     1-Exibir informações da pista?
     2-Simular uma corrida
-    3-Estatísticas do piloto
-    4-Votação do piloto (A votação só pode ser feita antes de simular a corrida)
-    5-Fazer Login
-    6-Cadastro
-    7-Deslogar
-    8-Sair do programa
+    3-Votação do piloto (A votação só pode ser feita antes de simular a corrida)
+    4-Fazer Login
+    5-Cadastro
+    6-Deslogar
+    7-Sair do programa
     '''
     global dicionario_contas
     tupla_corrida = None
@@ -77,7 +76,7 @@ def menu() -> None:
                     print('Portanto, não poderá votar depois.')
                 time.sleep(5)
 
-            case 4:
+            case 3:
                 if corrida.corrida_estruturada is True:
                     print('''A corrida já aconteceu, você já não pode mais votar.
 Deseja reiniciar a corrida?''')
@@ -108,14 +107,14 @@ Deseja reiniciar a corrida?''')
                         print('Você deve estar logado para votar')
                 time.sleep(2.5)
 
-            case 5:
+            case 4:
                 if login.login_status is False:
                     _, nome_cadastrado = login.login_usuario(dicionario_contas)
                 else:
                     print('Você já está logado')
                 time.sleep(2.5)
 
-            case 6:
+            case 5:
                 if login.login_status is False:
                     dicionario_contas, nome_cadastrado, _ = login.cadastrar_usuario(dicionario_contas)
                     banco_de_dados.adicionar_usuario(dicionario_contas, nome_cadastrado)
@@ -123,7 +122,7 @@ Deseja reiniciar a corrida?''')
                     print('Não é possível se cadastrar, você já está logado')
                 time.sleep(2)
 
-            case 7:
+            case 6:
                 if not login.login_status:
                     print('Para deslogar, é preciso primeiro estar logado')
                 else:
@@ -131,7 +130,7 @@ Deseja reiniciar a corrida?''')
                     print('Deslogado com sucesso!')
                 time.sleep(3)
 
-            case 8:
+            case 7:
                 print('Saindo do programa...')
                 time.sleep(2)
                 break
