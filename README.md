@@ -15,7 +15,7 @@ Este projeto é um simulador de corrida inspirado em parâmetros aproximados da 
 
 O projeto é composto pelos seguintes arquivos principais:
 
-- **menu.py:** Gerencia o menu principal do simulador, oferecendo opções como iniciar a corrida, visualizar estatísticas dos pilotos e votar. Integra-se ao sistema de pontuação dos pilotos.
+- **menu.py:** Gerencia o menu principal do simulador, oferecendo opções como iniciar a corrida, visualizar estrtura da corrida e votar. Integra-se ao sistema de pontuação dos pilotos.
 - **corrida.py:** Contém a lógica da simulação de corrida, calculando as velocidades dos pilotos e atualizando suas posições com base em fatores aleatórios.
 - **pontos.py:** Gerencia o sistema de pontuação dos pilotos, distribuindo pontos conforme o desempenho de cada piloto nas corridas.
 - **banco_de_dados.py:** Armazena dados dos usuários, como login, pontuação e outras informações, utilizando um arquivo de texto para persistência dos dados.
