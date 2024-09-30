@@ -20,7 +20,7 @@ O projeto é composto pelos seguintes arquivos principais:
 - **pontos.py:** Gerencia o sistema de pontuação dos pilotos, distribuindo pontos conforme o desempenho de cada piloto nas corridas.
 - **banco_de_dados.py:** Armazena dados dos usuários, como login, pontuação e outras informações, utilizando um arquivo de texto para persistência dos dados.
 - **votacao.py:** Implementa o sistema de votação, permitindo que os usuários escolham e votem em seus pilotos preferidos antes da corrida.
-- **login.py:** O arquivo login.py é responsável pela autenticação dos usuários. Ele gerencia a entrada no sistema, verificando se os dados de login fornecidos pelo usuário correspondem aos registrados no sistema. Essa verificação garante que apenas usuários cadastrados possam acessar as funcionalidades do simulador. Além disso, o login.py também cuida do processo de logout, permitindo que os usuários finalizem suas sessões.
+- **login.py:** O arquivo login.py é responsável pelas funções de cadastro e login dos usuários no sistema. Ele gerencia a autenticação e armazenamento de dados, garantindo que apenas usuários cadastrados possam acessar as funcionalidades do simulador. Além disso, há uma verificação completa das credenciais, com ênfase na segurança de senhas e informações.
 
 ## Funcionalidades
 
