@@ -1,4 +1,5 @@
 import time
+import json
 from os import system
 
 escolha_piloto = {}
@@ -52,34 +53,38 @@ def votar_piloto(escolha_piloto: dict, corredores: list, pontos: int):
 
 def checar_palpite(escolha_piloto: dict, ganhadores: dict, usuario: str) -> int:
     """Função serve para checar se acertou o palpite e atualizar os pontos no banco de dados"""
-    linhas = []
+    dados = {}
     pontos = 0
     
     try:
-        with open('banco_de_dados.txt', 'r', encoding='utf-8') as arquivo:
-            linhas = arquivo.readlines()
+        with open('banco_de_dados.json', 'r', encoding='utf-8') as arquivo:
+            dados = json.load(arquivo)
 
-        for i, linha in enumerate(linhas):
-            dados = linha.strip().split(',')
-            if dados[0] == usuario:
-                try:
-                    pontos = int(dados[-1])
-                except ValueError:
-                    print("Erro ao ler os pontos do usuário. Definindo pontos como 0.")
-                    pontos = 0
-                contador = 1
-                for chave, valor in escolha_piloto.items():
-                    if chave in ganhadores and valor == ganhadores[chave]:
-                        pontos += 50
-                        print(f'{contador}° palpite: Parabéns! Você acertou. Ganhou 50 pontos e está com {pontos}.')
-                    else:
-                        print(f'{contador}° palpite: Você errou. Agora está com {pontos} pontos.')
-                    contador += 1
-                dados[-1] = str(pontos)
-                linhas[i] = ','.join(dados) + '\n'
-                break
-        with open('banco_de_dados.txt', 'w', encoding='utf-8') as arquivo:
-            arquivo.writelines(linhas)
+        if usuario in dados:
+            try:
+                pontos = int(dados[usuario]['pontos'])
+            except ValueError:
+                print("Erro ao ler os pontos do usuário. Definindo pontos como 0.")
+                pontos = 0
+
+            contador = 1
+            for chave, valor in escolha_piloto.items():
+                if chave in ganhadores and valor == ganhadores[chave]:
+                    pontos += 50
+                    print(f'{contador}° palpite: Parabéns! Você acertou. Ganhou 50 pontos e está com {pontos}.')
+                else:
+                    print(f'{contador}° palpite: Você errou. Agora está com {pontos} pontos.')
+                contador += 1
+
+            # Atualiza os pontos do usuário
+            dados[usuario]['pontos'] = str(pontos)
+        else:
+            print(f'Usuário {usuario} não encontrado.')
+
+        # Salva as alterações no arquivo JSON
+        with open('banco_de_dados.json', 'w', encoding='utf-8') as arquivo:
+            json.dump(dados, arquivo, ensure_ascii=False, indent=4)
+
     except FileNotFoundError:
-        print("Erro: O arquivo 'banco_de_dados.txt' não foi encontrado.")
+        print("Erro: O arquivo 'banco_de_dados.json' não foi encontrado.")
     return pontos

@@ -1,0 +1,20 @@
+{
+    "usuario1": {
+        "nome_de_usuario": "usuario1",
+        "email": "usuario1@email.com",
+        "senha": "senha123",
+        "pontos": 100
+    },
+    "usuario2": {
+        "nome_de_usuario": "usuario2",
+        "email": "usuario2@email.com",
+        "senha": "senha456",
+        "pontos": 200
+    },
+    "Juan": {
+        "nome_de_usuario": "juanito",
+        "email": "thenexte25@gmail.com",
+        "senha": "R9u2s1a7@",
+        "pontos": 100
+    }
+}
